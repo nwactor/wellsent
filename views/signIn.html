@@ -3,31 +3,36 @@
 <head>
 	<title>well_Sent.io</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
-  
+  <link rel="stylesheet" type="text/css" href="../public/css/style.css">
 </head>
 <body>
-<div class = "container">
-  <header id="navbar" class="row">
-    <div class="col-8"></div>
-    <div class="col-4">
-      <a id="signin">Sign In</a>
+<div class="container-fluid">
+    <header id="topbar" class="row">
+        <div class="col-10"></div>
+        <div class="col-2">
+            <a id="signin" href="">Login</a>
+        </div>
+    </header>
+    <div id="content-row" class="row">
+        <div class="col-md-3"></div>
+        <div id="content-column" class="col-md-6" >
+            <div class="form-container">
+                <form>
+                    <label>Username: </label>
+                    <input id="username-input" type=text>
+                    <br>
+                    <label>Password: </label>
+                    <input id="password-input" type="text">
+                    <br>
+                    <input id="submit-btn" type="submit" value="Go">
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
     </div>
-  </header>
-  <div class = "row">
-    <div class = "col-md-2"></div>
-    <div class = "col-md-8" >
-      <div class="form-container">
-      	<form>
-          <label>Name: </label>
-          <input id="username-input" type=text>
-        	<label>Password: </label>
-          <input id="password-input" type="text">
-      		<input type="submit">
-        </form>
-      </div>
-    </div>
-    <div class = "col-md-2"></div>
-  </div>
 </div>
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="../public/js/loginPageLogic.js"></script>
 </body>
 </html>

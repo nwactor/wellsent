@@ -1,0 +1,33 @@
+body {
+	/*background-color: gray;*/
+}
+
+.container-fluid {
+	height: 100%;
+	/*background-color: red;*/
+}
+
+#topbar {
+	background-color: #d5ffff;
+	border-bottom: 1px solid black; 
+}
+
+.content-row {
+	height: 100%;
+}
+
+.form-container {
+	text-align: center;
+
+	padding: 30px;
+
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+
+	margin-top: 10%;
+}
+
+form {
+	
+}
