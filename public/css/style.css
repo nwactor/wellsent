@@ -9,12 +9,15 @@ body {
 
 #topbar {
 	background-color: #d5ffff;
-	border-bottom: 1px solid black; 
+	border-bottom: 1px solid black;
+	height: 4vh;
 }
 
 .content-row {
 	height: 100%;
 }
+
+/*Login Page*/
 
 .form-container {
 	text-align: center;
@@ -28,6 +31,46 @@ body {
 	margin-top: 10%;
 }
 
-form {
+/*Main Page*/
+
+#content-row {
+	height: 96vh;
+}
+
+#sidebar {
+	border-right: 1px solid black;
+	min-height: wrap;
+}
+
+#user-search-area, #conversation-area {
 	
+}
+
+#user-search-area {
+	height: 10%;
+	border-bottom: 1px solid black;
+}
+
+#conversation-area {
+	
+}
+
+#message-area {
+	height: 80%;
+}
+
+#input-row {
+	height: 20%;
+	border-top: 1px solid black;
+	bottom: 0;
+	text-align: center;
+}
+
+#user-input-box {
+	width: 90%;
+	height: 70%;
+}
+
+#send-area {
+	border-left: 1px solid black;
 }
