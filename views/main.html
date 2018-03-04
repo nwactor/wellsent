@@ -3,16 +3,17 @@
 <head>
     <title>well_Sent.io</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+    <link rel="stylesheet" type="text/css" href="../public/css/style.css">
 </head>
 <body>
-<div class="container">
-    <header id="navbar" class="row">
-        <div class="col-8"></div>
-        <div class="col-4">
-            <a id="signin">Sign In</a>
+<div class="container-fluid">
+    <header id="topbar" class="row">
+        <div class="col-10">Wellsent</div>
+        <div class="col-2">
+            <a id="logout" href="#">Logout</a>
         </div>
     </header>
-    <div class="row">
+    <div id="content-row" class="row">
         <div id="sidebar" class="col-2">
             <div id="user-search-area" class="row">
                 search
@@ -22,19 +23,24 @@
             </div>
         </div>
         <div class="col-10">
-            <div id="main-area" class="row">
+            <div id="message-area" class="row">
                 messages
             </div>
-            <div class="row">
-                <div id="input-area" class="col">
-                    <textarea></textarea>
+            <div id="input-row" class="row">
+                <div id="input-area" class="col-10">
+                    <span>Send Message</span>
+                    <br>
+                    <textarea id="user-input-box"></textarea>
                 </div>
-                <div id="send-area" class="col">
+                <div id="send-area" class="col-2">
                     <button>Send</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="../public/js/mainPageLogic.js"></script>
 </body>
 </html>
