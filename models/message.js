@@ -1,20 +1,17 @@
 module.exports = function(sequelize, DataTypes) {
-	var Message = sequelize.define(
-		"Message", 
-		{
-			body: DATATYPES.INT
-		}
-	);
+	var Message = sequelize.define("Message", {
+		body: DataTypes.INTEGER
+	});
 	
 	Message.associate = function(models) {
 		Message.belongsTo(models.User, {
 			foreignKey: {
-				allowNull: false;
+				allowNull: false
 			}
 		});
 		Message.belongsTo(models.MessagePool, {
 			foreignKey: {
-				allowNull: false;
+				allowNull: false
 			}
 		});
 	}
