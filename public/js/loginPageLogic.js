@@ -5,10 +5,12 @@ $('#signin').on('click', function(event) {
 
 	if(mode === 'login') {
 		mode = 'signup';
-		$(this).text('Sign Up');
+		$('#content-title').text('Sign Up');
+		$(this).text('Login');
 	} else { //mode === 'signup'
 		mode = 'login';
-		$(this).text('Login');
+		$('#content-title').text('Login');
+		$(this).text('Sign Up');
 	}
 });
 
@@ -32,5 +34,5 @@ function tryLogin() {
 }
 
 function trySignUp() {
-	
+
 } 
