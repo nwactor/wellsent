@@ -42,7 +42,10 @@ $( function(){
       } else {
         $.post("/api/user", {username: username, password: pwd}).then(function(response) {
           console.log(response);
-          $.get("/main");
+        }).then(function(response) {
+          $.get("/main").then(function(response) {
+            window.location.href = "/main";
+          });
         });
       }
     });
