@@ -1,6 +1,6 @@
 var db = require("../models");
 
-const Op = Sequelize.Op
+const Op = db.Op
 
 module.exports = function(app) {
 
@@ -36,7 +36,7 @@ module.exports = function(app) {
     })
   });
 
-  ///////////Make a New User/////////////
+  ///////////Delete a User/////////////
   app.delete("/api/user/:username", function(req, res) {
     db.User.destroy({
       where: { username: req.params.username }

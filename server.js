@@ -26,6 +26,11 @@ app.use(express.static("public"));
 
 // Routes
 // =============================================================
+require("./routes/html-routes")(app);
+require("./routes/user-api-routes")(app);
+require("./routes/message-api-routes")(app);
+require("./routes/message-pool")(app);
+
 // require("./routes/post-api-routes.js")(app);
 // require("./routes/author-api-routes.js")(app);
 // require("./routes/html-routes.js")(app);

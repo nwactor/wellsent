@@ -23,6 +23,7 @@ $( function(){
     var pwd = $("#signinPwd").val().trim();
     console.log("username: "+ username);
     console.log("pwd: " + pwd);
+
   });
 
   $("#signupButton").on("click", function(event){
@@ -32,5 +33,23 @@ $( function(){
     var pwd = $("#signupPwd").val().trim();
     console.log("username: "+ username);
     console.log("pwd: " + pwd);
+    $.get("/api/user/" + username).then(function(response) {
+      //if null, username isn't taken
+      console.log(response);
+      if(response != null) {
+        //put in some red text that says user name already taken
+        alert('too late');
+      } else {
+        $.post("/api/user", {username: username, password: pwd}).then(function(response) {
+          console.log(response);
+          $.get("/main");
+        });
+      }
+    });
   });
+
+
+
+
+
 });
