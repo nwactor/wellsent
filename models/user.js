@@ -1,7 +1,7 @@
-//exports a function that finds one user using mysql 
-//
-var User = {
-  var findOne = function(){
-    
-  };
-};
+module.exports = function(sequelize, DataTypes) {
+	var User = sequelize.define("User", {
+		username: DataTypes.STRING,
+		password: DataTypes.STRING
+	});
+	return User;
+}
