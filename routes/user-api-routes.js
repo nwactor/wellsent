@@ -1,4 +1,5 @@
 var db = require("../models");
+var passport = require("../config/passport");
 
 const Op = db.Op
 
@@ -27,13 +28,16 @@ module.exports = function(app) {
   });
 
   ///////////Make a New User/////////////
-  app.post("/api/user", function(req, res) {
+  app.post("/api/signup", function(req, res) {
     db.User.create({
       username: req.body.username, //////////check with front-end///////////
       password: req.body.password //////////check with front-end///////////
-    }).then(function(data) {
-      res.json(data);
-    })
+    }).then(function() {
+      res.redirect("/main");
+    }).catch(function(err){
+      console.log("SIGNUP ERROR: "+err);
+      res.json(err);
+    });
   });
 
   ///////////Delete a User/////////////

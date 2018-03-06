@@ -21,8 +21,17 @@ $( function(){
     //get the login stuff
     var username = $("#signinUsername").val().trim();
     var pwd = $("#signinPwd").val().trim();
-    console.log("username: "+ username);
-    console.log("pwd: " + pwd);
+    //clear input fields;
+    $("#signinUsename").val("");
+    $("#signinPwd").val("");
+    //check if we have the usename and thee password
+    if(!usename || !pwd ){ return; }
+    $.post("api/user/authenticate",{ username: username, password: pwd;
+    }).then(function(response){
+      $.get("/main").then(function(resp){
+        window.location.href = "/main";
+      });
+    });
 
   });
 
@@ -31,8 +40,6 @@ $( function(){
     //get the signup stuff
     var username = $("#signupUsername").val().trim();
     var pwd = $("#signupPwd").val().trim();
-    console.log("username: "+ username);
-    console.log("pwd: " + pwd);
     $.get("/api/user/" + username).then(function(response) {
       //if null, username isn't taken
       console.log(response);
@@ -50,9 +57,6 @@ $( function(){
       }
     });
   });
-
-
-
 
 
 });
