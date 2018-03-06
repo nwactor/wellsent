@@ -6,17 +6,16 @@
 // =============================================================
 var express = require("express");
 var bodyParser = require("body-parser");
+var session = require("express-session");
 var passport = require("passport");
 
 // Sets up the Express App
 // =============================================================
-var app = express();
 var PORT = process.env.PORT || 8080;
-
-// Requiring our models for syncing
 var db = require("./models");
 
 // Sets up the Express app to handle data parsing
+var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
@@ -26,7 +25,10 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(express.static("public"));
 
 //Passport
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Routes
 // =============================================================
