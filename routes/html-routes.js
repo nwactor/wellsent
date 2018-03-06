@@ -17,7 +17,7 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../views/signup.html"));
   });
 
-  app.get("logout", function(req,res){
+  app.get("/logout", function(req,res){
     res.redirect("/");
   });
 
