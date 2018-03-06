@@ -19,6 +19,10 @@
   "homepage": "https://github.com/nwactor/wellsent#readme",
   "dependencies": {
     "base-conversion": "^3.3.0",
-    "string-to-binary": "^0.1.2"
+    "string-to-binary": "^0.1.2",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mysql2": "^1.5.2",
+    "sequelize": "^4.35.2"
   }
 }
