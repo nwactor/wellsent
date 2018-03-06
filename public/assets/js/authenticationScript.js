@@ -45,10 +45,6 @@ $( function(){
       } else {
         $.post("/api/signup", {username: username, password: password}).then(function(response) {
           console.log(response);
-        }).then(function(response) {
-          $.get("/main").then(function(response) {
-            window.location.href = "/main";
-          });
         });
       }
     });
