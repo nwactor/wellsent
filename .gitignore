@@ -1,5 +1,4 @@
 node_modules
 .DS_Store
 *.swp
-config/config.json
-
+**/config.json
