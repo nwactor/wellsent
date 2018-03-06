@@ -3,23 +3,35 @@
 <head>
     <title>well_Sent.io</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://unpkg.com/blaze/scss/dist/blaze.min.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 <body>
 <div class="container-fluid">
     <header id="topbar" class="row">
-        <div class="col-10">Wellsent</div>
-        <div class="col-2">
-            <a id="logout" href="#">Logout</a>
+        <ul class="c-nav c-nav--inline">
+          <li class="c-nav__item"><i class="fas fa-home"></i> Home</li>
+          <li class="c-nav__item"><i class="fas fa-star"></i> News</li>
+          <li class="c-nav__item c-nav__item--right"><i class="fas fa-user"></i> Contact</li>
+        </ul>
         </div>
     </header>
     <div id="content-row" class="row">
         <div id="sidebar" class="col-2">
             <div id="user-search-area" class="row">
-                search
+                <input class="c-field" placeholder="Search Conversations" type="text" />
+                <button type="button" class="c-button u-xsmall">Search</button>
+
             </div>
             <div id="conversation-area" class="row">
-                conversations
+                <ul class="c-nav" style="width: 100%;">
+                  <li class="c-nav__content u-centered c-text--loud">MY APP</li>
+                  <li class="c-nav__item c-nav__item--success c-nav__item--active"><i class="fas fa-plus"></i> Create New</li>
+                  <li class="c-nav__item"><i class="fas fa-home"></i> Home</li>
+                  <li class="c-nav__item c-nav__item--brand"><i class="fas fa-question-circle"></i> About</li>
+                  <li class="c-nav__item c-nav__item--info"><i class="fas fa-star"></i> News</li>
+                  <li class="c-nav__item c-nav__item--error"><i class="fas fa-life-ring"></i> Help</li>
+                </ul>
             </div>
         </div>
         <div class="col-10">
@@ -30,7 +42,11 @@
                 <div id="input-area" class="col-10">
                     <span>Send Message</span>
                     <br>
-                    <textarea id="user-input-box"></textarea>
+                    <div class="o-panel-container" style="height: 100%">
+                        <div class="o-panel">
+                            <textarea id="user-input-box"></textarea>
+                        </div>
+                    </div>
                 </div>
                 <div id="send-area" class="col-2">
                     <button>Send</button>
