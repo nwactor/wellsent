@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/nwactor/wellsent/issues"
   },
-  "homepage": "https://github.com/nwactor/wellsent#readme"
+  "homepage": "https://github.com/nwactor/wellsent#readme",
+  "dependencies": {
+    "base-conversion": "^3.3.0",
+    "string-to-binary": "^0.1.2"
+  }
 }
