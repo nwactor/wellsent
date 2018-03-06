@@ -3,18 +3,23 @@
 var passport = require("passport");
 var LocalStrategy   = require('passport-local').Strategy;
 
-var User = require('../models/user');
+var db = require('../models');
 
 passport.use(new LocalStrategy(
   {
     usernameField: "username"
   },
   function(username, password, done){
-    User.findOne({ where: {username:username}}).then(function(err,user){
-      if(err){ 
-        console.log("Passport Error: ");
-        return done(err); 
-      }
+    console.log('authenticating');
+    db.User.findOne({ 
+        where: {
+            username:username
+        }
+    }).then(function(user){
+      // if(err){ 
+      //   console.log("Passport Error: ");
+      //   return done(err); 
+      // }
       if (!user){
         return done(null,false, {message: "Incorrect Username"});
       }

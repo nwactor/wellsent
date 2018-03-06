@@ -28,7 +28,7 @@ module.exports = function(app) {
   });
 
   ///////////LOGIN ROUTE /////////////TODO: Added this to compare with the example
-  app.post("api/login", passport.authenticate("local"), function(req,res){
+  app.post("/api/login", passport.authenticate("local"), function(req,res){
     res.json("/main");
   });
   
@@ -51,20 +51,18 @@ module.exports = function(app) {
       where: { username: req.params.username }
     }).then(function(data) {
       res.json(data);
-    })
+    });
   });
 
-  app.get("/api/user/authenticate", function(req, res) {
-    
-
-    db.User.findOne({
-      where: {
-        username: req.body.username, //////////check with front-end///////////
-        password: req.body.password //////////check with front-end///////////
-      }.then(function(data) {
-        res.json(data);
-      })
-    })
-  });
+  // app.get("/api/user/authenticate", function(req, res) {
+  //   db.User.findOne({
+  //     where: {
+  //       username: req.body.username, //////////check with front-end///////////
+  //       password: req.body.password //////////check with front-end///////////
+  //     }.then(function(data) {
+  //       res.json(data);
+  //     })
+  //   })
+  // });
 
 }

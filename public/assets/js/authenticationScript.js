@@ -1,25 +1,28 @@
 
 $( function(){
 
-  $("#signinButton").on("click", function(event){
+  $("#loginButton").on("click", function(event){
     event.preventDefault();
     //get the login stuff
-    var username = $("#signinUsername").val().trim();
-    var password = $("#signinPwd").val().trim();
+    var username = $("#loginUsername").val().trim();
+    var password = $("#loginPwd").val().trim();
     //clear input fields;
-    $("#signinUsename").val("");
-    $("#signinPwd").val("");
+    $("#loginUsername").val("");
+    $("#loginPwd").val("");
     //check if we have the usename and thee password
-    if(!usename || !password ){ return; }
-    $.post("api/login",{ 
+    
+    if(!username || !password ){ return; }
+    $.post("/api/login",{ 
       username: username, 
       password: password 
     }).then(function(data){
       console.log(data);
       window.location.replace(data);
-    }).catch(function(err){
-      console.log(err);
     });
+    /*
+    .catch(function(err){
+      console.log(err);
+    });*/
   });
 
   $("#signupButton").on("click", function(event){
@@ -49,15 +52,6 @@ $( function(){
         });
       }
     });
-
-    // $.post("/api/signup",{
-    //   username: username,
-    //   password: password
-    // }).then(function(data){
-    //   window.location.replace(data);
-    // }).catch(function(err){
-    //   console.log(err);
-    // });
   });
 
 });

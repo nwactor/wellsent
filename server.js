@@ -6,6 +6,7 @@
 // =============================================================
 var express = require("express");
 var bodyParser = require("body-parser");
+var passport = require("passport");
 
 // Sets up the Express App
 // =============================================================
@@ -24,6 +25,9 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Static directory
 app.use(express.static("public"));
 
+//Passport
+app.use(passport.initialize());
+
 // Routes
 // =============================================================
 require("./routes/html-routes")(app);
@@ -31,13 +35,9 @@ require("./routes/user-api-routes")(app);
 require("./routes/message-api-routes")(app);
 require("./routes/messagepool-api-routes")(app);
 
-// require("./routes/post-api-routes.js")(app);
-// require("./routes/author-api-routes.js")(app);
-// require("./routes/html-routes.js")(app);
-
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
   });
