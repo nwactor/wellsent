@@ -6,9 +6,15 @@ var LocalStrategy   = require('passport-local').Strategy;
 var User = require('../models/user');
 
 passport.use(new LocalStrategy(
+  {
+    usernameField: "username"
+  },
   function(username, password, done){
-    User.findOne({username:username}, function(err,user){
-      if(err){ return done(err); }
+    User.findOne({ where: {username:username}}).then(function(err,user){
+      if(err){ 
+        console.log("Passport Error: ");
+        return done(err); 
+      }
       if (!user){
         return done(null,false, {message: "Incorrect Username"});
       }
@@ -20,6 +26,17 @@ passport.use(new LocalStrategy(
   }
 ));
 
+passport.serializeUser(function(user,cb){
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj,cb){
+  cb(null, user);
+});
+
+module.exports = passport;
+
+/*
 // load up the user model
 
 // expose this function to our app using module.exports
@@ -96,3 +113,4 @@ module.exports = function(passport) {
     }));
 
 };
+*/

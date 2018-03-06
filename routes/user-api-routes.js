@@ -27,6 +27,11 @@ module.exports = function(app) {
     })
   });
 
+  ///////////LOGIN ROUTE /////////////TODO: Added this to compare with the example
+  app.post("api/login", passport.authenticate("local"), function(req,res){
+    res.json("/main");
+  });
+  
   ///////////Make a New User/////////////
   app.post("/api/signup", function(req, res) {
     db.User.create({
