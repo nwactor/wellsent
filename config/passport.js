@@ -1,10 +1,26 @@
-// config/passport.js
 
-// load all the things we need
+// config/passport.js
+var poassport = require("passport");
 var LocalStrategy   = require('passport-local').Strategy;
 
+var User = require('../models/user');
+
+passport.use(new LocalStrategy(
+  function(username, password, done){
+    User.findOne({username:username}, function(err,user){
+      if(err){ return done(err); }
+      if (!user){
+        return done(null,false, {message: "Incorrect Username"});
+      }
+      if (!user.validPassword(password)){
+          return done(null,false, {message: "Incorrect Password"});
+      }
+      return done(null,user);
+    });
+  }
+));
+
 // load up the user model
-var User            = require('../app/models/user');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
