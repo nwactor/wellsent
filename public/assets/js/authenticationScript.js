@@ -15,6 +15,7 @@ $( function(){
       username: username, 
       password: password 
     }).then(function(data){
+      console.log(data);
       window.location.replace(data);
     }).catch(function(err){
       console.log(err);
@@ -32,15 +33,14 @@ $( function(){
     $("#signupUsername").val("");
     $("#signupPwd").val("");
 
-    /*
-    $.post("/api/user/" + username).then(function(response) {
+    $.get("/api/user/" + username).then(function(response) {
       //if null, username isn't taken
       //console.log(response);
       if(response != null) {
         //put in some red text that says user name already taken
         alert('too late');
       } else {
-        $.post("/api/user", {username: username, password: password}).then(function(response) {
+        $.post("/api/signup", {username: username, password: password}).then(function(response) {
           console.log(response);
         }).then(function(response) {
           $.get("/main").then(function(response) {
@@ -49,15 +49,15 @@ $( function(){
         });
       }
     });
-    */
-    $.post("/api/signup",{
-      username: username,
-      password: password
-    }).then(function(data){
-      window.location.replace(data);
-    }).catch(function(err){
-      console.log(err);
-    });
+
+    // $.post("/api/signup",{
+    //   username: username,
+    //   password: password
+    // }).then(function(data){
+    //   window.location.replace(data);
+    // }).catch(function(err){
+    //   console.log(err);
+    // });
   });
 
 });

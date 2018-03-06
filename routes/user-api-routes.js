@@ -55,6 +55,8 @@ module.exports = function(app) {
   });
 
   app.get("/api/user/authenticate", function(req, res) {
+    
+
     db.User.findOne({
       where: {
         username: req.body.username, //////////check with front-end///////////
@@ -63,6 +65,6 @@ module.exports = function(app) {
         res.json(data);
       })
     })
-  })
+  });
 
 }

@@ -9,12 +9,13 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../views/login.html"));
   });
 
-
+  //To trap those users that arent logged in trying to access this page
   app.get("/main", function(req, res) {
-    if(req.user){
-      res.redirect("/main");
-    }
-    res.sendFile(path.join(__dirname, "../views/login.html"));
+    res.sendFile(path.join(__dirname,"../views/main.html"));
+    // if(req.user){
+    //   res.redirect("/main");
+    // }
+    // res.sendFile(path.join(__dirname, "../views/login.html"));
   });
 
   app.get("/signup", function(req, res) {
@@ -25,7 +26,6 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
-  //To trap those users that arent logged in trying to access this page
   app.get("/main", isAuthenticated, function(req, res){
     res.sendFile(path.join(__dirname,"../views/main.html"));
   });
