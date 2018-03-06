@@ -19,6 +19,8 @@
   "homepage": "https://github.com/nwactor/wellsent#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "base-conversion": "^3.3.0",
+    "string-to-binary": "^0.1.2",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mysql2": "^1.5.2",
