@@ -102,4 +102,7 @@ if (!isBinary(message)){
 
 console.log(output);
 //exporting the output
+
 module.exports = output;
+
+
