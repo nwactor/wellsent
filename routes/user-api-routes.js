@@ -51,6 +51,9 @@ module.exports = function(app) {
   ///////////Search Users/////////////
   app.get("/api/user/search/:username", function(req, res) {
     db.User.findAll({
+      attributes: {
+        ['username']
+      },
       where: {
         username: {
           [Op.like]: '%' + req.params.username
