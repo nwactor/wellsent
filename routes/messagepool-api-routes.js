@@ -1,4 +1,5 @@
 var db = require("../models");
+var generator = require("../public/assets/js/generator.js");
 
 module.exports = function(app) {
 
@@ -11,8 +12,9 @@ module.exports = function(app) {
   });
 
   app.post("/api/messagePool/", function(req, res) {
-    db.MessagePool.create()
-      .then(function(data) {
+    db.MessagePool.create({
+      key: generator
+    }).then(function(data) {
         var poolId = data.id;
         db.UserPoolJunction.create({
           UserUsername: req.body.username, ////////////check with front-end/////////
