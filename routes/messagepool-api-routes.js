@@ -16,11 +16,13 @@ module.exports = function(app) {
         var poolId = data.id;
         db.UserPoolJunction.create({
           UserUsername: req.body.username, ////////////check with front-end/////////
-          MessagePoolId: poolId
+          MessagePoolId: poolId,
+          receivedKey: true
         }).then(function(data) {
           db.UserPoolJunction.create({
             UserUsername: req.body.receivername, ////////////check with front-end/////////
-            MessagePoolId: poolId
+            MessagePoolId: poolId,
+            receivedKey: false
           });
         }).then(function(data) {
           res.json(data);
