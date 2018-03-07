@@ -20,18 +20,19 @@ module.exports = function(app) {
       username: req.body.username, //////////check with front-end///////////
       password: req.body.password //////////check with front-end///////////
     }).then(function() {
-      res.redirect("/main");
+      res.redirect(307, "/api/login");
     }).catch(function(err){
       console.log("SIGNUP ERROR: "+err);
       res.json(err);
     });
   });
 
-  ///////////LOGIN /////////////
+  ///////////Try to authenticate a user/////////////
   app.post("/api/login", passport.authenticate("local"), function(req,res){
     res.json("/main");
   });
 
+  ///////////Get the current User/////////////
   app.get("/api/user_data", function(req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
@@ -68,7 +69,5 @@ module.exports = function(app) {
       res.json(data);
     });
   });
-
-
 
 }

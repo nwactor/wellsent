@@ -43,8 +43,9 @@ $( function(){
         //put in some red text that says user name already taken
         alert('too late');
       } else {
-        $.post("/api/signup", {username: username, password: password}).then(function(response) {
-          console.log(response);
+        $.post("/api/signup", {username: username, password: password}).then(function(data) {
+          console.log(data);
+          window.location.replace(data);
         });
       }
     });
