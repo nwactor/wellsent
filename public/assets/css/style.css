@@ -7,9 +7,11 @@ body {
 }
 
 .container-fluid {
+	padding-left:10px !important;
+	padding-right:10px !important;
 	height: 100%;
-	width:100%;
-	/*background-color: red;*/
+/*	width:100%;
+*/	/*background-color: red;*/
 }
 #singin-height{
 	width:25%;
@@ -43,7 +45,7 @@ body {
 }
 
 #sidebar {
-	border-right: 1px solid black;
+	padding-left:auto;
 	min-height: wrap;
 }
 
@@ -53,8 +55,8 @@ body {
 
 #user-search-area {
 	height: 10%;
-	border-bottom: 1px solid black;
-}
+/*	border-bottom: 1px solid black;
+*/}
 
 #conversation-area {
 	
@@ -66,8 +68,8 @@ body {
 
 #input-row {
 	height: 20%;
-	border-top: 1px solid black;
-	bottom: 0;
+/*	border-top: 1px solid black;
+*/	bottom: 0;
 	text-align: center;
 }
 
@@ -77,5 +79,5 @@ body {
 }
 
 #send-area {
-	border-left: 1px solid black;
-}
+/*	border-left: 1px solid black;
+*/}
