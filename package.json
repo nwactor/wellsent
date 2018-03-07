@@ -28,7 +28,7 @@
     "sequelize": "^4.35.2",
     "sha.js": "^2.4.10",
     "string-to-binary": "^0.1.2",
-    "validate.io-binary-string": "^1.0.0"
+    "validate.io-binary-string": "^1.0.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "sequelize": "^4.35.2",
