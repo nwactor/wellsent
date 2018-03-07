@@ -21,14 +21,14 @@ module.exports = function(app) {
       password: req.body.password //////////check with front-end///////////
     }).then(function() {
       res.redirect(307, "/api/login");
-    }).catch(function(err){
-      console.log("SIGNUP ERROR: "+err);
+    }).catch(function(err) {
+      console.log("SIGNUP ERROR: " + err);
       res.json(err);
     });
   });
 
   ///////////Try to authenticate a user/////////////
-  app.post("/api/login", passport.authenticate("local"), function(req,res){
+  app.post("/api/login", passport.authenticate("local"), function(req, res) {
     res.json("/main");
   });
 
@@ -37,8 +37,7 @@ module.exports = function(app) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
-    }
-    else {
+    } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
@@ -46,14 +45,12 @@ module.exports = function(app) {
         id: req.user.id
       });
     }
-  });  
-  
+  });
+
   ///////////Search Users/////////////
   app.get("/api/user/search/:username", function(req, res) {
     db.User.findAll({
-      attributes: {
-        ['username']
-      },
+      attributes: ['username'],
       where: {
         username: {
           [Op.like]: '%' + req.params.username
