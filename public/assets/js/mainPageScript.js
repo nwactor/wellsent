@@ -10,7 +10,7 @@ var userPools;
 // and updates the HTML on the page
 $.get("/api/user_data").then(function(data) {
   username = data.username;
-  $(".username").text(username);
+  $("#username-display").text("Welcome, " + username);
   //loadPools();
 });
  
@@ -22,29 +22,8 @@ $.get("/api/user_data").then(function(data) {
 
 $('#search-user-btn').on('click', function() {
   //show the search modal
+  $('#myModal').modal();
 });
-
-$('#send-btn').on('click', function() {
-  var message = $('#message-input').val().trim();
-  if(message != '') {
-    var encodedMessage = locksmith(message);
-    $.post("/api/message", {
-      body: encodedMessage,
-      UserUsername: username,
-      MessagePoolID: currentPoolID
-    }).then(function(result) {
-      //display in UI
-      
-      //clear the message input
-      $('#message-input').val('');
-    });
-  }
-});
-
-//open search area
-function displaySearchArea() {
-  
-}
 
 //search for users
 function searchUsers() {
@@ -122,10 +101,26 @@ function filterPools() {
 //===============Message Area==================
 //=============================================
 
-
 //load messages when a pool is opened
 function loadMessages() {
   
 }
+
+$('#send-btn').on('click', function() {
+  var message = $('#message-input').val().trim();
+  if(message != '') {
+    var encodedMessage = locksmith(message);
+    $.post("/api/message", {
+      body: encodedMessage,
+      UserUsername: username,
+      MessagePoolID: currentPoolID
+    }).then(function(result) {
+      //display in UI
+      
+      //clear the message input
+      $('#message-input').val('');
+    });
+  }
+});
 
 //update messages: use firebase? or sequelize triggers
