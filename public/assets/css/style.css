@@ -8,8 +8,6 @@ body {
 
 
 .container-fluid {
-	padding-left:10px !important;
-	padding-right:10px !important;
 	height: 100%;
 /*	width:100%;
 */	/*background-color: red;*/
@@ -69,6 +67,9 @@ body {
 
 #message-area {
 	height: 80%;
+	flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: 10px
 }
 
 #input-row {
