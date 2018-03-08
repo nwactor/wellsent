@@ -11,7 +11,7 @@ var userPools = [];
 $.get("/api/user_data").then(function(data) {
   username = data.username;
   $("#username-display").text("Welcome, " + username);
-  //loadPools();
+  loadPools();
 });
  
 //link to locksmith in main.

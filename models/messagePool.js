@@ -4,7 +4,11 @@ module.exports = function(sequelize, DataTypes) {
 	});
 
 	MessagePool.associate = function(models) {
-		MessagePool.belongsToMany(models.User, { through: {model: models.UserPoolJunction} });
+		MessagePool.belongsToMany(models.User, { 
+			through: {
+        		model: models.UserPoolJunction
+      		}
+		});
 	};
 
 	return MessagePool;

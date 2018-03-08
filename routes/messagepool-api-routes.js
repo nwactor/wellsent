@@ -9,9 +9,9 @@ module.exports = function(app) {
 
     db.MessagePool.findAll({
       include: [{ 
-        model: db.UserPoolJunction,
+        model: db.User,
         where: {
-          userUsername: req.params.username 
+          username: req.params.username 
         }
       }]
     })
