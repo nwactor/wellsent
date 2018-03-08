@@ -1,74 +1,93 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/blaze/scss/dist/blaze.min.css">
-  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-  <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
-  <title>Well Sent</title>
+    <title>Well Sent</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/blaze/scss/dist/blaze.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 
 <body>
-  <div class="container-fluid">
-    <header id="topbar" class="row">
-      <ul class="c-nav c-nav--inline">
-        <li class="c-nav__item"><i class="fas fa-home"></i> Home</li>
-        <li class="c-nav__item"><i class="fas fa-star"></i> News</li>
-        <li class="c-nav__item c-nav__item--right"><i class="fas fa-user"></i> Contact</li>
-        <li class="c-nav__item c-nav__item--right"><i class="fas fa-user"></i><a href="/logout"> Logout </a></li>
-      </ul>
-  </div>
-  </header>
-  <div id="content-row" class="row">
-    <div id="sidebar" class="col-2">
-      <nav class="navbar navbar-light bg-light">
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search Conversations" aria-label="Search Conversations">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
-</nav>
-      <div id="conversation-area" class="row">
-        <ul class="c-nav" style="width: 100%;">
-          <li class="c-nav__content u-centered c-text--loud">MY APP</li>
-          <li class="c-nav__item c-nav__item--success c-nav__item--active"><i class="fas fa-plus"></i> Create New</li>
-          <li class="c-nav__item"><i class="fas fa-home"></i> Home</li>
-          <li class="c-nav__item c-nav__item--brand"><i class="fas fa-question-circle"></i> About</li>
-          <li class="c-nav__item c-nav__item--info"><i class="fas fa-star"></i> News</li>
-          <li class="c-nav__item c-nav__item--error"><i class="fas fa-life-ring"></i> Help</li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-10">
-      <div id="message-area" class="row">
-        <div class="c-card">
-          <div class="c-card__body">
-
-          </div>
-        </div>
-      </div>
-      <div id="input-row" class="row">
-        <div id="input-area" class="col-10">
-
-          <br>
-          <div class="o-panel-container" style="height: 100%">
-            <div class="o-panel">
-              <input id='message-input' class="c-field u-super" placeholder="Message Here...." type="text">
+  
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Search Users</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="search-results" class="modal-body"></div>
+                <div class="modal-footer">
+                    <input id="search-input" type="" name="">
+                    <button type="button" class="btn btn-secondary" id='search-users-btn'>Search</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id='close-btn'>Close</button>
+                </div>
             </div>
-          </div>
         </div>
-        <div id="send-area" class="col-2">
-          <div class="u-center-block__content">
-            <button id='send-btn' type="button" class="c-button c-button--ghost-brand">Send</button>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  </div>
 
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script type="text/javascript" src="./assets/js/mainPageScript.js"></script>
+    <!-- Page Body -->
+    <div class="container-fluid">
+        <header id="topbar" class="row">
+            <ul class="c-nav c-nav--inline">
+                <!-- <li class="c-nav__item"><i class="fas fa-home"></i> Home</li>
+                <li class="c-nav__item"><i class="fas fa-star"></i> News</li> -->
+                <li class="c-nav__item">Wellsent</li>
+                <!-- <a href="/logout"></a> -->
+                <li class="c-nav__item c-nav__item--right"><i class="fas fa-user"></i><a href="/logout"> Logout </a></li>
+            </ul>
+        </header>
+    <div id="content-row" class="row">
+        <div id="sidebar" class="col-2">
+            <span id="username-display"></span>
+            <div id="user-search-area" class="row">
+                <button id='open-search-btn' type="button" class="c-button u-xsmall">Search</button>
+            </div>
+            <div id="conversation-pool-area" class="row">
+                <h3>Conversations</h3>
+                <input type="" name="" placeholder="filter">
+                <ul id="pool-list" class="c-nav" style="width: 100%;">
+                    <!-- <li class="c-nav__content u-centered c-text--loud">MY APP</li>
+                  <li class="c-nav__item c-nav__item--success c-nav__item--active"><i class="fas fa-plus"></i> Create New</li>
+                  <li class="c-nav__item"><i class="fas fa-home"></i> Home</li>
+                  <li class="c-nav__item c-nav__item--brand"><i class="fas fa-question-circle"></i> About</li>
+                  <li class="c-nav__item c-nav__item--info"><i class="fas fa-star"></i> News</li>
+                  <li class="c-nav__item c-nav__item--error"><i class="fas fa-life-ring"></i> Help</li> -->
+                </ul>
+            </div>
+        </div>
+        <div class="col-10">
+            <div id="message-area" class="row">
+                <div class="c-card">
+                    <div class="c-card__body"></div>
+                </div>
+            </div>
+            <div id="input-row" class="row">
+                <div id="input-area" class="col-10">
+                    <br>
+                    <div class="o-panel-container" style="height: 100%">
+                        <div class="o-panel">
+                            <input id=' message-input ' class="c-field u-super" placeholder="Message Here...." type="text">
+                        </div>
+                    </div>
+                </div>
+                <div id="send-area" class="col-2">
+                    <div class="u-center-block__content">
+                        <button id='send-btn ' type="button" class="c-button c-button--ghost-brand">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./assets/js/mainPageScript.js"></script>
 </body>
 
 </html>
