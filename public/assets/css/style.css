@@ -40,16 +40,11 @@ body {
 /*Main Page*/
 
 #content-row {
-	height: 96vh;
+	height: 650px;
 }
 
 #sidebar {
-	padding-left:auto;
 	min-height: wrap;
-}
-
-#user-search-area, #conversation-area {
-	
 }
 
 #user-search-area {
@@ -57,12 +52,31 @@ body {
 /*	border-bottom: 1px solid black;
 */}
 
+#open-search-btn {
+	width: 95%;
+	height: 100%;
+	margin: auto;
+}
+
 .search-result {
 	cursor: pointer;
 }
 
-#conversation-area {
-	
+#conversation-pool-area {
+	margin-top: 10px;
+}
+
+#conversations-header {
+	margin: auto;
+}
+
+#conversation-filter {
+	margin: auto;
+	margin-bottom: 5px;
+}
+
+.conversation-tab {
+	cursor: pointer;
 }
 
 #message-area {

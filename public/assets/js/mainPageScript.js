@@ -71,74 +71,65 @@ function loadPools() {
   userPools = [];
   $.get("/api/messagePool/" + username).then(function(response) {
     console.log(response);
-    /*
+    
     response.forEach(function(pool) {
     	var poolFrontEnd = createPoolUI(pool);
     	userPools.push(poolFrontEnd);
-		userPools.sort(function(a, b) {
-       		return new Date(b.data('data-pool').updatedAt) - new Date(a.data('data-pool').updatedAt);
-       	});
+		  userPools.sort(function(a, b) {
+       	return new Date(b.data('data-pool').updatedAt) - new Date(a.data('data-pool').updatedAt);
+      });
     });
 
     userPools.forEach(function(pool) {
 		$('#pool-list').append(pool);
     });
-    */
+    
   });
 }
 
-//takes an array of MessagePool JSON, makes a frontend for each index in the array,
-//and adds the frontend to the global userPools array
-// function getUserPools(response, index) {
-// 	if(index < getUserPools.length) {
-// 		//get the pool data
-// 		var pool = response[index];
-// 		//create a UI for it
-// 		var poolFrontEnd = createPoolUI(pool);
-// 		poolFrontEnd.data('data-pool', pool);
-
-// 		$.get('/api/messagePool/' + pool.id).then(function(users) {
-// 			poolFrontEnd.data('data-memebers', users);
-
-// 			userPools.push(poolFrontEnd);
-//       		userPools.sort(function(a, b) {
-//         		return new Date(b.data('data-pool').updatedAt) - new Date(a.data('data-pool').updatedAt);
-//       		});
-
-//       		getUserPools(response, index + 1);
-// 		});
-// 	}
-// }
-
 function createPoolUI(data) {
-  	var pool = $('<div>');
+  	var pool = $('<li>');
   	pool.data('data-pool', data[0]);
 
   	//get the usernames of all the members
-  	var members = [];
-  	for(var i = 1; i < data.length; i++) {
-  		if(data[i].UserUsername != username) {
-  			members.push(data[i].UserUsername);
-  		}
-  	}
-  	pool.data('data-members', members);
+  	pool.data('data-members', data[1]);
 
   	pool.addClass('conversation-tab');
-	//do more stuff to make it look like something
+    
+    //do more stuff to make it look like something
+    var poolTitle = '';
+    for(var i = 0; i < data[1].length; i++) {
+      if(data[1][i].UserUsername != username) {
+        poolTitle += data[1][i].UserUsername;
+      }
+    }
+
+    pool.text(poolTitle);
+
+    
+
+    pool.addClass('c-nav__item');
+    pool.addClass('c-nav__item--success');
 
   	return pool;
 }
 
 $(document).on('click', '.conversation-tab', function() {
-	openPool($(this).data('data-pool').id);
+	openPool($(this));
 });
 
 function openPool(pool) {
 	currentPoolID = pool.data('data-pool').id;
-	console.log(pool.data('data-pool'));
-	console.log(pool.data('data-members'));
+	// console.log(pool.data('data-pool'));
+	// console.log(pool.data('data-members'));
 	//open the pool
 
+  //clear the message area
+  //target the message area
+  //get all messages for pool
+  //with the array of messages, go through each one
+    //build a UI for it, coloring based on who said what
+    //append to the message area
 }
 
 //filter message pools

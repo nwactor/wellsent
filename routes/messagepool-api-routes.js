@@ -1,14 +1,33 @@
 var db = require("../models");
 var generator = require("../public/assets/js/generator.js");
 
+//helper function for /api/messagePool/:username (the first get route)
+function addJoinData(poolArray, index, res) {
+  db.UserPoolJunction.findAll({
+    attributes: ['UserUsername'],
+    where: {
+      MessagePoolId: poolArray[index].id
+    }
+  }).then(function(memberData) {
+    poolArray[index] = [poolArray[index], memberData];
+    if(index === poolArray.length - 1) {
+      res.json(poolArray);
+    } else {
+      addJoinData(poolArray, index + 1, res);
+    }
+  });
+}
+
 module.exports = function(app) {
 
   //get all message pools associated with a user
   app.get("/api/messagePool/:username", function(req, res) {
-    var data = [];
+    var data;
 
+    //maybe find all with user and include message pool instead
     db.MessagePool.findAll({
       include: [{ 
+        attributes: ['username'], //only want message pool data, but at least this gets rid of most of user data
         model: db.User,
         where: {
           username: req.params.username 
@@ -17,18 +36,8 @@ module.exports = function(app) {
     })
     //also get all of the members in pool
     .then(function(poolData) {
-      data.push(poolData);
-      db.UserPoolJunction.findAll({
-        attributes: ['UserUsername'],
-        where: {
-          MessagePoolId: poolData.id
-        }
-      })
-      //send all the data back
-      .then(function(memberData) {
-        data.push(memberData);
-        res.json(data);
-      });
+      data = poolData;
+      addJoinData(data, 0, res);
     });
   });
 
