@@ -7,7 +7,7 @@ var userPools;
 $.get("/api/user_data").then(function(data) {
   username = data.username;
   $(".username").text(username);
-  loadPools();
+  //loadPools();
 });
  
 //link to locksmith in main.html before the link to this file
@@ -39,24 +39,34 @@ function loadPools() {
   //clear the pool UI
   userPools = [];
   $.get("/api/messagePool/" + username).then(function(response) {
-    response.forEach(function(pool) {
-      //unoptimized push and sort
-      var poolFrontend = createPoolUI();
-      poolFrontEnd.data('data-pool', pool);
-      
-      userPools.push(poolFrontend);
-      userPools.sort(function(a, b) {
-        return new Date(b.updatedAt) - new Date(a.updatedAt);
-      });
-    });
+    getUserPools(response, 0);
     console.log(userPools);
-    
     //add pools to UI
   });
 }
 
-function createPoolUI() {
+function getUserPools(response, index) {
+	if(index < getUserPools.length) {
+		var pool = response[index]
+		var poolFrontEnd = createPoolUI(pool);
+		poolFrontEnd.data('data-pool', pool);
+
+		$.get('/api/messagePool/' + pool.id).then(function(users) {
+			poolFrontEnd.data('data-memebers', users);
+
+			userPools.push(poolFrontend);
+      		userPools.sort(function(a, b) {
+        		return new Date(b.data('data-pool').updatedAt) - new Date(a.data('data-pool').updatedAt);
+      		});
+
+      		getUserPools(response, index + 1);
+		});
+	}
+}
+
+function createPoolUI(data) {
   var pool = $('<div>');
+
   //do more stuff to make it look like something
   return pool;
 }

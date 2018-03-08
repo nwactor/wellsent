@@ -11,6 +11,10 @@ module.exports = function(sequelize, DataTypes) {
     password: DataTypes.STRING
   });
 
+  User.associate = function(models) {
+      User.belongsToMany(models.MessagePool, { through: {model: models.UserPoolJunction} });
+  }
+
   User.prototype.validPassword = function(password){
     return bcrypt.compareSync(password,this.password);
   };

@@ -3,10 +3,10 @@ module.exports = function(sequelize, DataTypes) {
     receivedKey: DataTypes.BOOLEAN
   });
 
-  UserPoolJunction.associate = function(models) {
-    models.User.belongsToMany(models.MessagePool, { through: UserPoolJunction });
-    models.MessagePool.belongsToMany(models.User, { through: UserPoolJunction });
-  }
+  // UserPoolJunction.associate = function(models) {
+  //   models.User.belongsToMany(models.MessagePool, { through: models.UserPoolJunction });
+  //   models.MessagePool.belongsToMany(models.User, { through: models.UserPoolJunction });
+  // };
 
   return UserPoolJunction;
 }
