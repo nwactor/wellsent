@@ -8,28 +8,28 @@ module.exports = function(app) {
     var data = [];
 
     db.MessagePool.findAll({
-      include: [{ 
-        model: db.User,
-        where: {
-          username: req.params.username 
-        }
-      }]
-    })
-    //also get all of the members in pool
-    .then(function(poolData) {
-      data.push(poolData);
-      db.UserPoolJunction.findAll({
-        attributes: ['UserUsername'],
-        where: {
-          MessagePoolId: poolData.id
-        }
+        include: [{
+          model: db.User,
+          where: {
+            username: req.params.username
+          }
+        }]
       })
-      //send all the data back
-      .then(function(memberData) {
-        data.push(memberData);
-        res.json(data);
+      //also get all of the members in pool
+      .then(function(poolData) {
+        data.push(poolData);
+        db.UserPoolJunction.findAll({
+            attributes: ['UserUsername'],
+            where: {
+              MessagePoolId: poolData.id
+            }
+          })
+          //send all the data back
+          .then(function(memberData) {
+            data.push(memberData);
+            res.json(data);
+          });
       });
-    });
   });
 
   //get all users associated with a message pool
@@ -49,32 +49,32 @@ module.exports = function(app) {
 
     //create the pool
     db.MessagePool.create({
-      key: generator
-    })
-    //create the conenction with the sender
-    .then(function(poolData) {
-      data.push(poolData);
-      var poolId = poolData.id;
-      db.UserPoolJunction.create({
-        UserUsername: req.body.username,
-        MessagePoolId: poolId,
-        receivedKey: true
+        key: generator
       })
-      //create the connection with the reciever
-      .then(function(senderData) {
-        data.push(senderData);
+      //create the conenction with the sender
+      .then(function(poolData) {
+        data.push(poolData);
+        var poolId = poolData.id;
         db.UserPoolJunction.create({
-          UserUsername: req.body.receivername,
-          MessagePoolId: poolId,
-          receivedKey: false
-        })
-        //send all of the information back to the user
-        .then(function(receiverData) {
-          data.push(receiverData);
-          res.json(data);
-        });
+            UserUsername: req.body.username,
+            MessagePoolId: poolId,
+            receivedKey: true
+          })
+          //create the connection with the reciever
+          .then(function(senderData) {
+            data.push(senderData);
+            db.UserPoolJunction.create({
+                UserUsername: req.body.receivername,
+                MessagePoolId: poolId,
+                receivedKey: false
+              })
+              //send all of the information back to the user
+              .then(function(receiverData) {
+                data.push(receiverData);
+                res.json(data);
+              });
+          });
       });
-    });
   });
 
   //delete a pool by id
