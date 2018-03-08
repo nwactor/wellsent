@@ -1,4 +1,5 @@
 var db = require("../models");
+var locksmith = require('../routes/locksmith.js');
 
 module.exports = function(app) {
 
@@ -9,6 +10,11 @@ module.exports = function(app) {
     }).then(function(data) {
       res.json(data);
     });
+  });
+
+  //encode and decode messages
+  app.post("/api/message/encode", function(req, res) {
+    res.json(locksmith(req.body.key, req.body.message));
   });
 
   app.post("/api/message", function(req, res) {
@@ -28,6 +34,5 @@ module.exports = function(app) {
       res.json(data);
     });
   });
-
 
 }

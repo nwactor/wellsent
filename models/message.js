@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
 	var Message = sequelize.define("Message", {
-		body: DataTypes.INTEGER
+		body: DataTypes.STRING.BINARY
 	});
 	
 	Message.associate = function(models) {

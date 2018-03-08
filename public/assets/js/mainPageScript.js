@@ -81,7 +81,7 @@ function loadPools() {
     });
 
     userPools.forEach(function(pool) {
-		$('#pool-list').append(pool);
+		  $('#pool-list').append(pool);
     });
     
   });
@@ -124,13 +124,25 @@ function openPool(pool) {
 	//open the pool
 
   //clear the message area
-  $('#displayed-messages').empty();
+  
   //target the message area
   //get all messages for pool
   //with the array of messages, go through each one
     //build a UI for it, coloring based on who said what
     //append to the message area
   loadMessages();
+}
+
+function getCurrentPoolKey() {
+  var key;
+  userPools.forEach(function(pool) {
+    var poolData = $(pool).data('data-pool');
+
+    if(poolData.id === currentPoolID) {
+      key = poolData.key;
+    }
+  });
+  return key;
 }
 
 //filter message pools
@@ -145,35 +157,43 @@ function filterPools() {
 
 //load messages when a pool is opened
 function loadMessages() {
+  $('#displayed-messages').empty();
+
   $.get('/api/message/' + currentPoolID).then(function(result) {
     result.forEach(function(message) {
-      var bubble = $('<span>');
-      bubble.addClass('c-bubble u-color-white');
-      bubble.text(message.body);
-      if(message.UserUsername === username) {
-        bubble.addClass('c-bubble--right');
-      } else {
-        bubble.addClass('c-bubble--left');
-      }
-      $('#displayed-messages').append(bubble);
+      $.post('/api/message/encode', {key: getCurrentPoolKey(), message: message.body}).then(function(decoded) {
+        var bubble = $('<span>');
+        bubble.addClass('c-bubble u-color-white u-display-block');
+        bubble.text(decoded);
+        if(message.UserUsername === username) {
+          bubble.addClass('c-bubble--left');
+        } else {
+          bubble.addClass('c-bubble--right');
+        }
+        $('#displayed-messages').append(bubble);
+      });
     });
   });
 }
 
 $('#send-btn').on('click', function() {
   var message = $('#message-input').val().trim();
+  key = getCurrentPoolKey();
+
   if(message != '') {
-    var encodedMessage = 1000009;//locksmith(message);
-    console.log(username);
-    $.post("/api/message", {
-      body: encodedMessage,
-      UserUsername: username,
-      MessagePoolID: currentPoolID
-    }).then(function(result) {
-      //display in UI
-      
-      //clear the message input
-      $('#message-input').val('');
+    $.post("/api/message/encode", { key: key, message: message }).then(function(encodedMessage) {
+      console.log(encodedMessage);
+
+      $.post("/api/message", {
+        body: encodedMessage,
+        UserUsername: username,
+        MessagePoolID: currentPoolID
+      }).then(function(result) {
+        //display in UI
+        loadMessages();
+        //clear the message input
+        $('#message-input').val('');
+      });
     });
   }
 });

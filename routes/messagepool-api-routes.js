@@ -1,5 +1,5 @@
 var db = require("../models");
-var generator = require("../public/assets/js/generator.js");
+var generator = require("../routes/generator.js");
 
 //helper function for /api/messagePool/:username (the first get route)
 function addJoinData(poolArray, index, res) {
