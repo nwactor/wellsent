@@ -20,15 +20,25 @@ $.get("/api/user_data").then(function(data) {
 //===============User Searching================
 //=============================================
 
-$('#search-user-btn').on('click', function() {
+$('#open-search-btn').on('click', function() {
   //show the search modal
   $('#myModal').modal();
 });
 
-//search for users
-function searchUsers() {
-  
-}
+$('#search-users-btn').on('click', function() {
+	$('#search-results').empty();
+
+	var searchTerm = $('#search-input').val();
+	$.get('/api/user/search/' + searchTerm).then(function(response) {
+		response.forEach(function(user) {
+			if(user.username != username) {
+				var result = $('<div>');
+				result.text(user.username);
+				$('#search-results').append(result);
+			}
+		});
+	});
+});
 
 function startConversation(recipient) {
   
