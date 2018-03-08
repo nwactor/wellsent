@@ -10,7 +10,10 @@ $(function() {
     $("#loginPwd").val("");
     //check if we have the usename and thee password
 
-    if (!username || !password) { alert('Please enter your username and password!'); return; }
+    if (!username || !password) {
+      alert('Please enter your username and password!');
+      return;
+    }
     $.post("/api/login", {
       username: username,
       password: password
@@ -35,6 +38,7 @@ $(function() {
     username = $("#signupUsername").val().trim(),
       password = $("#signupPwd").val().trim()
     if (!username || !password) {
+      alert('Please enter both a username and password!');
       return;
     }
     $("#signupUsername").val("");
