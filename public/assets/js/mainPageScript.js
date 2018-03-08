@@ -44,7 +44,9 @@ $('#search-users-btn').on('click', function() {
 $(document).on('click', '.search-result', function() {
 	var recipient = $(this).text();
 	if(confirm('Are you sure you want to start a conversation with ' + recipient + '?')) {
-		startConversation(recipient);
+		//close modal
+    $('#myModal').modal('toggle');
+    startConversation(recipient);
 	}
 });
 
