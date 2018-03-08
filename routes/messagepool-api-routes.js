@@ -5,15 +5,30 @@ module.exports = function(app) {
 
   //get all message pools associated with a user
   app.get("/api/messagePool/:username", function(req, res) {
+    var data = [];
+
     db.MessagePool.findAll({
       include: [{ 
         model: db.UserPoolJunction,
-        where: { 
+        where: {
           userUsername: req.params.username 
-        } 
+        }
       }]
-    }).then(function(data) {
-      res.json(data);
+    })
+    //also get all of the members in pool
+    .then(function(poolData) {
+      data.push(poolData);
+      db.UserPoolJunction.findAll({
+        attributes: ['UserUsername'],
+        where: {
+          MessagePoolId: poolData.id
+        }
+      })
+      //send all the data back
+      .then(function(memberData) {
+        data.push(memberData);
+        res.json(data);
+      });
     });
   });
 
@@ -30,21 +45,32 @@ module.exports = function(app) {
   });
 
   app.post("/api/messagePool/", function(req, res) {
+    var data = [];
+
+    //create the pool
     db.MessagePool.create({
       key: generator
-    }).then(function(data) {
-      var poolId = data.id;
-      console.log(req.body);
+    })
+    //create the conenction with the sender
+    .then(function(poolData) {
+      data.push(poolData);
+      var poolId = poolData.id;
       db.UserPoolJunction.create({
         UserUsername: req.body.username,
         MessagePoolId: poolId,
         receivedKey: true
-      }).then(function(data) {
+      })
+      //create the connection with the reciever
+      .then(function(senderData) {
+        data.push(senderData);
         db.UserPoolJunction.create({
           UserUsername: req.body.receivername,
           MessagePoolId: poolId,
           receivedKey: false
-        }).then(function(data) {
+        })
+        //send all of the information back to the user
+        .then(function(receiverData) {
+          data.push(receiverData);
           res.json(data);
         });
       });
@@ -82,4 +108,4 @@ module.exports = function(app) {
     });
   });
 
-}
+};
