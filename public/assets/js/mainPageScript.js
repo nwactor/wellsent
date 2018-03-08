@@ -1,3 +1,7 @@
+//=============================================
+//===============Page Load=====================
+//=============================================
+
 var currentPoolID;
 var username;
 var userPools;
@@ -12,6 +16,9 @@ $.get("/api/user_data").then(function(data) {
  
 //link to locksmith in main.html before the link to this file
 
+//=============================================
+//===============User Searching================
+//=============================================
 
 $('#search-user-btn').on('click', function() {
   //show the search modal
@@ -33,6 +40,26 @@ $('#send-btn').on('click', function() {
     });
   }
 });
+
+//open search area
+function displaySearchArea() {
+  
+}
+
+//search for users
+function searchUsers() {
+  
+}
+
+function startConversation(recipient) {
+  
+}
+
+//=============================================
+//===============Message Pools=================
+//=============================================
+
+//store key and update database when everyone has recieved it
 
 //load message pools in UI
 function loadPools() {
@@ -71,7 +98,7 @@ function createPoolUI(data) {
   	var pool = $('<div>');
   	pool.addClass('conversation-tab')
 	//do more stuff to make it look like something
-	
+
   	return pool;
 }
 
@@ -82,7 +109,7 @@ $(document).on('click', '.conversation-tab', function() {
 function openPool(id) {
 	currentPoolID = id;
 	//open the pool
-	
+
 }
 
 //filter message pools
@@ -91,20 +118,10 @@ function filterPools() {
   
 }
 
+//=============================================
+//===============Message Area==================
+//=============================================
 
-//open search area
-function displaySearchArea() {
-  
-}
-
-//search for users
-function searchUsers() {
-  
-}
-
-function startConversation(recipient) {
-  
-}
 
 //load messages when a pool is opened
 function loadMessages() {
@@ -112,6 +129,3 @@ function loadMessages() {
 }
 
 //update messages: use firebase? or sequelize triggers
-
-
-//store key and update database when everyone has recieved it
