@@ -33,21 +33,22 @@ module.exports = function(app) {
     db.MessagePool.create({
       key: generator
     }).then(function(data) {
-        var poolId = data.id;
+      var poolId = data.id;
+      console.log(req.body);
+      db.UserPoolJunction.create({
+        UserUsername: req.body.username,
+        MessagePoolId: poolId,
+        receivedKey: true
+      }).then(function(data) {
         db.UserPoolJunction.create({
-          UserUsername: req.body.username, ////////////check with front-end/////////
+          UserUsername: req.body.receivername,
           MessagePoolId: poolId,
-          receivedKey: true
-        }).then(function(data) {
-          db.UserPoolJunction.create({
-            UserUsername: req.body.receivername, ////////////check with front-end/////////
-            MessagePoolId: poolId,
-            receivedKey: false
-          });
+          receivedKey: false
         }).then(function(data) {
           res.json(data);
-        })
+        });
       });
+    });
   });
 
   //delete a pool by id
@@ -60,7 +61,7 @@ module.exports = function(app) {
     //////////it should cascade delete everything in UserPoolJunction////////////
   });
 
-  app.post("/api/messagePool/", function(req, res) {
+  app.post("/api/messagePool", function(req, res) {
     db.UserPoolJunction.create({
       UserUsername: req.body.username, ////////////check with front-end/////////
       MessagePoolId: req.body.poolId ////////////check with front-end/////////
@@ -70,7 +71,7 @@ module.exports = function(app) {
   });
 
   //delete all pools associated with user
-  app.delete("/api/messagePool/", function(req, res) {
+  app.delete("/api/messagePool", function(req, res) {
     db.UserPoolJunction.destroy({
       where: {
         UserUsername: req.body.username, ////////////check with front-end/////////

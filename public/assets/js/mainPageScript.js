@@ -34,14 +34,24 @@ $('#search-users-btn').on('click', function() {
 			if(user.username != username) {
 				var result = $('<div>');
 				result.text(user.username);
+				result.addClass('search-result');
 				$('#search-results').append(result);
 			}
 		});
 	});
 });
 
+$(document).on('click', '.search-result', function() {
+	var recipient = $(this).text();
+	if(confirm('Are you sure you want to start a conversation with ' + recipient + '?')) {
+		startConversation(recipient);
+	}
+});
+
 function startConversation(recipient) {
-  
+  	$.post('/api/messagePool/', {username: username, receivername: recipient}).then(function() {
+  		console.log(result);
+  	});
 }
 
 //=============================================
