@@ -63,6 +63,7 @@ module.exports = function(app) {
     //create the conenction with the sender
     .then(function(poolData) {
       data.push(poolData);
+      data[1] = [];
       var poolId = poolData.id;
       db.UserPoolJunction.create({
         UserUsername: req.body.username,
@@ -71,7 +72,7 @@ module.exports = function(app) {
       })
       //create the connection with the reciever
       .then(function(senderData) {
-        data.push(senderData);
+        data[1].push(senderData);
         db.UserPoolJunction.create({
           UserUsername: req.body.receivername,
           MessagePoolId: poolId,
@@ -79,7 +80,7 @@ module.exports = function(app) {
         })
         //send all of the information back to the user
         .then(function(receiverData) {
-          data.push(receiverData);
+          data[1].push(receiverData);
           res.json(data);
         });
       });
