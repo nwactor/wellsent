@@ -68,10 +68,21 @@ function getUserPools(response, index) {
 }
 
 function createPoolUI(data) {
-  var pool = $('<div>');
+  	var pool = $('<div>');
+  	pool.addClass('conversation-tab')
+	//do more stuff to make it look like something
+	
+  	return pool;
+}
 
-  //do more stuff to make it look like something
-  return pool;
+$(document).on('click', '.conversation-tab', function() {
+	openPool($(this).data('data-pool').id);
+});
+
+function openPool(id) {
+	currentPoolID = id;
+	//open the pool
+	
 }
 
 //filter message pools
