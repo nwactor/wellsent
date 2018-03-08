@@ -106,8 +106,6 @@ function createPoolUI(data) {
 
     pool.text(poolTitle);
 
-    
-
     pool.addClass('c-nav__item');
     pool.addClass('c-nav__item--success');
 
@@ -120,16 +118,19 @@ $(document).on('click', '.conversation-tab', function() {
 
 function openPool(pool) {
 	currentPoolID = pool.data('data-pool').id;
+  console.log('Switched to ' + currentPoolID);
 	// console.log(pool.data('data-pool'));
 	// console.log(pool.data('data-members'));
 	//open the pool
 
   //clear the message area
+  $('#displayed-messages').empty();
   //target the message area
   //get all messages for pool
   //with the array of messages, go through each one
     //build a UI for it, coloring based on who said what
     //append to the message area
+  loadMessages();
 }
 
 //filter message pools
@@ -144,13 +145,26 @@ function filterPools() {
 
 //load messages when a pool is opened
 function loadMessages() {
-  
+  $.get('/api/message/' + currentPoolID).then(function(result) {
+    result.forEach(function(message) {
+      var bubble = $('<span>');
+      bubble.addClass('c-bubble u-color-white');
+      bubble.text(message.body);
+      if(message.UserUsername === username) {
+        bubble.addClass('c-bubble--right');
+      } else {
+        bubble.addClass('c-bubble--left');
+      }
+      $('#displayed-messages').append(bubble);
+    });
+  });
 }
 
 $('#send-btn').on('click', function() {
   var message = $('#message-input').val().trim();
   if(message != '') {
-    var encodedMessage = locksmith(message);
+    var encodedMessage = 1000009;//locksmith(message);
+    console.log(username);
     $.post("/api/message", {
       body: encodedMessage,
       UserUsername: username,
