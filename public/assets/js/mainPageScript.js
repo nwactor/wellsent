@@ -14,7 +14,7 @@ $.get("/api/user_data").then(function(data) {
 
 
 $('#search-user-btn').on('click', function() {
-  
+  //show the search modal
 });
 
 $('#send-btn').on('click', function() {
@@ -42,6 +42,9 @@ function loadPools() {
     getUserPools(response, 0);
     console.log(userPools);
     //add pools to UI
+    userPools.forEach(function(pool) {
+    	$('#pool-list').append(pool);
+    });
   });
 }
 
