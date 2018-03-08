@@ -1,18 +1,22 @@
-
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Well Signup</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Exo">
   <style>
-    body { 
-    padding-top:80px; 
-    background-image: url("./assets/images/login.jpg");
-    background-size: cover;
+    body {
+      padding-top: 80px;
+      background-image: url("./assets/images/login.jpg");
+      background-size: cover;
+      font-family: 'Exo', serif;
+      font-size: 20px;
     }
-    .container{
     
+    #topbar {
+      padding-bottom: 20px;
     }
   </style>
 </head>
@@ -21,7 +25,9 @@
   <div class="container">
 
     <header id="topbar" class="row">
-      <div class="col-10"></div>
+      <div class="col-10">
+        <div>welcome to WELLSENT.io</div>
+      </div>
       <div class="col-2">
         <a id="topbarStuff" href="/">Login</a>
       </div>
@@ -31,12 +37,12 @@
       <h2 id="contentTitle">Signup</h2>
       <form method="post">
         <div class="form-group">
-            <label>username</label>
-            <input id="signupUsername" type="text" class="form-control" name="username">
+          <label>username</label>
+          <input id="signupUsername" type="text" class="form-control" name="username">
         </div>
         <div class="form-group">
-            <label>Password</label>
-            <input id="signupPwd" type="password" class="form-control" name="password">
+          <label>Password</label>
+          <input id="signupPwd" type="password" class="form-control" name="password">
         </div>
         <button id="signupButton" type="submit" class="btn btn-warning btn-lg">Signup</button>
       </form>
@@ -47,4 +53,5 @@
     <script src="./assets/js/authenticationScript.js"></script>
   </div>
 </body>
+
 </html>
