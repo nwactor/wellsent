@@ -1,45 +1,44 @@
-
 // config/passport.js
 var passport = require("passport");
-var LocalStrategy   = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 
 var db = require('../models');
 
-passport.use(new LocalStrategy(
-  {
+passport.use(new LocalStrategy({
     usernameField: "username"
   },
-  function(username, password, done){
+  function(username, password, done) {
     console.log('authenticating');
-    db.User.findOne({ 
-        where: {
-            username:username
-        }
-    }).then(function(user){
+    db.User.findOne({
+      where: {
+        username: username
+      }
+    }).then(function(user) {
       // if(err){ 
       //   console.log("Passport Error: ");
       //   return done(err); 
       // }
-      if (!user){
-        return done(null,false, {message: "Incorrect Username"});
+      if (!user) {
+        return done(null, false, { message: "Incorrect Username" });
       }
-      if (!user.validPassword(password)){
-          return done(null,false, {message: "Incorrect Password"});
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: "Incorrect Password" });
       }
-      return done(null,user);
+      return done(null, user);
     });
   }
 ));
 
-passport.serializeUser(function(user,cb){
+passport.serializeUser(function(user, cb) {
   cb(null, user);
 });
 
-passport.deserializeUser(function(user,cb){
+passport.deserializeUser(function(user, cb) {
   cb(null, user);
 });
 
 module.exports = passport;
+
 
 /*
 // load up the user model
