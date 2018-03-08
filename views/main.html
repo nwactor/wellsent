@@ -15,56 +15,54 @@
         <!-- <li class="c-nav__item"><i class="fas fa-home"></i> Home</li>
         <li class="c-nav__item"><i class="fas fa-star"></i> News</li> -->
         <li class="c-nav__item">Wellsent</li>
-        <li class="c-nav__item c-nav__item--right"><i class="fas fa-user username"></i><a href="/logout"> 
+        <li class="c-nav__item"><i class="fas fa-user username"></i></li>
+        <!-- <a href="/logout"></a> -->
         <li class="c-nav__item c-nav__item--right"><i class="fas fa-user"></i><a href="/logout"> Logout </a></li>
       </ul>
-  </header>
-  <div id="content-row" class="row">
-    <div id="sidebar" class="col-2">
-      <div id="user-search-area" class="row">
-        <!-- <input id='search-user-input' class="c-field" placeholder="Search Conversations" type="text" /> -->
-        <button id='search-user-btn' type="button" class="c-button u-xsmall">Search</button>
-      </div>
-      <div id="conversation-pool-area" class="row">
-        <h3>Conversations</h3>
-        <input type="" name="">
-        <ul id="pool-list" class="c-nav" style="width: 100%;">
-          <!-- <li class="c-nav__content u-centered c-text--loud">MY APP</li>
+    </header>
+    <div id="content-row" class="row">
+      <div id="sidebar" class="col-2">
+        <div id="user-search-area" class="row">
+          <input id='search-user-input' class="c-field" placeholder="Search Conversations" type="text" />
+          <button id='search-user-btn' type="button" class="c-button u-xsmall">Search</button>
+        </div>
+        <div id="conversation-pool-area" class="row">
+          <h3>Conversations</h3>
+          <ul id="pool-list" class="c-nav" style="width: 100%;">
+            <!-- <li class="c-nav__content u-centered c-text--loud">MY APP</li>
           <li class="c-nav__item c-nav__item--success c-nav__item--active"><i class="fas fa-plus"></i> Create New</li>
           <li class="c-nav__item"><i class="fas fa-home"></i> Home</li>
           <li class="c-nav__item c-nav__item--brand"><i class="fas fa-question-circle"></i> About</li>
           <li class="c-nav__item c-nav__item--info"><i class="fas fa-star"></i> News</li>
           <li class="c-nav__item c-nav__item--error"><i class="fas fa-life-ring"></i> Help</li> -->
-        </ul>
-      </div>
-    </div>
-    <div class="col-10">
-      <div id="message-area" class="row">
-        <div class="c-card">
-          <div class="c-card__body">
-
-          </div>
+          </ul>
         </div>
       </div>
-      <div id="input-row" class="row">
-        <div id="input-area" class="col-10">
+      <div class="col-10">
+        <div id="message-area" class="row">
+          <div class="c-card">
+            <div class="c-card__body"></div>
+          </div>
+        </div>
+        <div id="input-row" class="row">
+          <div id="input-area" class="col-10">
 
-          <br>
-          <div class="o-panel-container" style="height: 100%">
-            <div class="o-panel">
-              <input id=' message-input ' class="c-field u-super" placeholder="Message Here...." type="text">
+            <br>
+            <div class="o-panel-container" style="height: 100%">
+              <div class="o-panel">
+                <input id=' message-input ' class="c-field u-super" placeholder="Message Here...." type="text">
+              </div>
             </div>
           </div>
-        </div>
-        <div id="send-area" class="col-2">
-          <div class="u-center-block__content">
-            <button id='send-btn ' type="button" class="c-button c-button--ghost-brand">Send</button>
+          <div id="send-area" class="col-2">
+            <div class="u-center-block__content">
+              <button id='send-btn ' type="button" class="c-button c-button--ghost-brand">Send</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
   <script src="https://code.jquery.com/jquery.js"></script>
   <script type="text/javascript" src="./assets/js/mainPageScript.js"></script>
