@@ -1,11 +1,22 @@
 body {
 	/*background-color: black;*/
 }
+.c-bubble{
+	width:200px;
+	display: block;
+
+}
+.c-bubble--left{
+	float:right;
+}
 .c-nav{
 	height:100%;
 	background-color: purple;
 }
 
+button{
+	margin: auto;
+}
 
 .container-fluid {
 	height: 100%;

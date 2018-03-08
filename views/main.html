@@ -1,3 +1,5 @@
+<!-- line 73 added the speech bubbles for the test -->
+
 <!DOCTYPE html>
 <html>
 
@@ -5,6 +7,7 @@
     <title>Well Sent</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/blaze/scss/dist/blaze.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/blaze/dist/blaze.colors.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
@@ -47,7 +50,9 @@
         <div id="sidebar" class="col-2">
             <span id="username-display"></span>
             <div id="user-search-area" class="row">
-                <button id='open-search-btn' type="button" class="c-button u-xsmall">Search</button>
+                <div class="u-center-block">
+                    <button id="open-search-btn" type="button" class="c-button c-button--rounded c-button--ghost-info">People</button>
+                </div>
             </div>
             <div id="conversation-pool-area" class="row">
                 <h3>Conversations</h3>
@@ -65,7 +70,10 @@
         <div class="col-10">
             <div id="message-area" class="row">
                 <div class="c-card">
-                    <div class="c-card__body"></div>
+                    <div class="c-card__body">
+                        <span class="c-bubble c-bubble--right u-color-white">hello there!</span>
+                        <span class="c-bubble c-bubble--left u-color-white">whats. good.</span>
+                    </div>
                 </div>
             </div>
             <div id="input-row" class="row">
