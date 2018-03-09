@@ -37,6 +37,8 @@ We have created an **xOR** messaging hasher which hashes the message against the
 
 ## Build:
 
+Building this app requires node.js and mysql.
+
 1. Open terminal with git installed
 
 2. Navigate to folder you wish to use as the parent directory for the project
@@ -44,6 +46,12 @@ We have created an **xOR** messaging hasher which hashes the message against the
 3. `git clone https://github.com/nwactor/wellsent.git`
 
 4. `npm install` 
+
+5. Create a mysql database to store the app's data
+
+6. From your wellsent folder, open /config/config.json
+
+7. Add your mysql username and password to config, as well as the name of your local database.
 
 ## Run:
 
