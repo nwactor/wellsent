@@ -23,6 +23,7 @@ module.exports = function(app) {
       UserUsername: req.body.UserUsername, 
       MessagePoolId: req.body.MessagePoolID
     }).then(function(data) {
+      updateParentPool(req.body.MessagePoolID);
       res.json(data);
     });
   });
@@ -35,4 +36,15 @@ module.exports = function(app) {
     });
   });
 
+}
+
+function updateParentPool(id) {
+  db.MessagePool.update({
+    updateAt: Date.now()
+  },
+  {
+    where: {
+      id: id
+    } 
+  });
 }

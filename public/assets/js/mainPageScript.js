@@ -5,6 +5,7 @@
 var currentPoolID;
 var username;
 var userPools = [];
+var convoFilter = '';
 
 // On load does a GET request to figure out which user is logged in
 // and updates the HTML on the page
@@ -13,8 +14,6 @@ $.get("/api/user_data").then(function(data) {
   $("#username-display").text("Welcome, " + username);
   loadPools();
 });
- 
-//link to locksmith in main.
 
 //=============================================
 //===============User Searching================
@@ -66,29 +65,40 @@ function startConversation(recipient) {
 
 //store key and update database when everyone has recieved it
 
-//load message pools in UI
+//load message pools
 function loadPools() {
   //clear the pool UI
   $('#pool-list').empty();
   userPools = [];
   $.get("/api/messagePool/" + username).then(function(response) {
-    console.log(response);
     
     response.forEach(function(pool) {
     	var poolFrontEnd = createPoolUI(pool);
     	userPools.push(poolFrontEnd);
-		  userPools.sort(function(a, b) {
-       	return new Date(b.data('data-pool').updatedAt) - new Date(a.data('data-pool').updatedAt);
-      });
     });
 
-    userPools.forEach(function(pool) {
-		  $('#pool-list').append(pool);
-    });
-    
+    orderPools();
   });
 }
 
+//orders the pools in the sidebar
+function orderPools() {
+  userPools.sort(function(a, b) {
+    if(a.data('data-pool') != undefined && b.data('data-pool') != undefined) {
+      return new Date(b.data('data-pool').updatedAt) - new Date(a.data('data-pool').updatedAt);
+    }
+  });
+
+  $('#pool-list').empty();
+  
+  userPools.forEach(function(pool) {
+    if(pool.text().startsWith(convoFilter) || convoFilter == '') {
+      $('#pool-list').append(pool);
+    }
+  });
+}
+
+//creates the visual respresentation of a conversation for the sidebar
 function createPoolUI(data) {
   	var pool = $('<li>');
   	pool.data('data-pool', data[0]);
@@ -118,20 +128,11 @@ $(document).on('click', '.conversation-tab', function() {
 	openPool($(this));
 });
 
+//open the given pool
 function openPool(pool) {
+  console.log(pool);
 	currentPoolID = pool.data('data-pool').id;
   console.log('Switched to ' + currentPoolID);
-	// console.log(pool.data('data-pool'));
-	// console.log(pool.data('data-members'));
-	//open the pool
-
-  //clear the message area
-  
-  //target the message area
-  //get all messages for pool
-  //with the array of messages, go through each one
-    //build a UI for it, coloring based on who said what
-    //append to the message area
   loadMessages();
 }
 
@@ -147,11 +148,12 @@ function getCurrentPoolKey() {
   return key;
 }
 
-//filter message pools
-//called when filterInput.val changes
-function filterPools() {
-  
-}
+//apply filter to conversations
+$('#conversation-filter').on('input', function() {
+  convoFilter = $(this).val();
+  orderPools();
+});
+
 
 //=============================================
 //===============Message Area==================
@@ -179,6 +181,8 @@ function loadMessages() {
 }
 
 $('#send-btn').on('click', function() {
+  if(currentPoolID == undefined) { return; }
+
   var message = $('#message-input').val().trim();
   key = getCurrentPoolKey();
 
@@ -195,6 +199,8 @@ $('#send-btn').on('click', function() {
         loadMessages();
         //clear the message input
         $('#message-input').val('');
+        //reorder the pools in sidebar
+        orderPools();
       });
     });
   }
