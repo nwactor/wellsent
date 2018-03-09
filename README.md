@@ -60,7 +60,7 @@ and open browser to:
 
 ![Screen shot1](https://github.com/nwactor/wellsent/blob/master/public/assets/images/login.png?raw=true)
 
-![Screen shot1](https://github.com/nwactor/wellsent/blob/master/public/assets/images/enterusernamepassword.png?raw=true)
+![Screen shot1](https://github.com/nwactor/wellsent/blob/master/public/assets/images/enteruserpassword.png?raw=true)
 
 On the login page, create a username and password or login with your existing username and password.
 
