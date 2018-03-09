@@ -12,6 +12,7 @@ button {
 }
 
 .container-fluid {
+	max-height: 90%;
 }
 
 #singin-height {
@@ -19,7 +20,9 @@ button {
   height: 25%;
 }
 
-#topbar {}
+#topbar {
+	height: 7%;
+}
 
 .content-row {
   height: 100%;
@@ -88,12 +91,18 @@ button {
 
 #displayed-users {
   font-size: 40px;
+  position: absolute;
+  margin-right: auto;
+  margin-left: auto;
+  left: 0;
+  right: 0;
 }
 
 .c-bubble {
   width: 200px;
   margin-bottom: 10px;
   color: #a2c0ef;
+  /*overflow: auto;*/
 }
 
 .c-bubble--left {

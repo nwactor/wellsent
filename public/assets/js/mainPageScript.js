@@ -18,7 +18,6 @@ $.get("/api/user_data").then(function(data) {
 //set interval to display incoming messages periodically
 setInterval(function() {
   if(currentPoolID != undefined) {
-    console.log('interval');
     loadMessages();
   }
 }, 1500);
