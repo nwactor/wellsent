@@ -139,6 +139,7 @@ function openPool(pool) {
   currentPoolID = JSON.parse(pool.attr('data-pool')).id;
   console.log('Switched to ' + currentPoolID);
   $('#displayed-users').text(pool.text());
+  $('#displayed-messages').empty();
   loadMessages();
 }
 
