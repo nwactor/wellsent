@@ -1,4 +1,4 @@
-Project Two Group Three http://github.com/nwactor/wellsent
+Project Two Group Three [GitHub](http://github.com/nwactor/wellsent)
 **Wellsent** Secure Encrypted Anonymous Messaging Application
 Created by Nick Wactor, Yusuf Mekias, Hillari Malle, Denis Wu, Mike Thompson
 
