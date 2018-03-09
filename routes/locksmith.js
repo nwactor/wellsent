@@ -97,8 +97,8 @@ var locksmith = function(key, message) {
     }else{
         output = decrypt(binary_key,binary_message)
     }
+
+    return output;
 }    
 
 module.exports = locksmith;
-
-

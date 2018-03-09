@@ -44,7 +44,9 @@ $('#search-users-btn').on('click', function() {
 $(document).on('click', '.search-result', function() {
 	var recipient = $(this).text();
 	if(confirm('Are you sure you want to start a conversation with ' + recipient + '?')) {
-		startConversation(recipient);
+		//close modal
+    $('#myModal').modal('toggle');
+    startConversation(recipient);
 	}
 });
 
@@ -71,74 +73,78 @@ function loadPools() {
   userPools = [];
   $.get("/api/messagePool/" + username).then(function(response) {
     console.log(response);
-    /*
+    
     response.forEach(function(pool) {
     	var poolFrontEnd = createPoolUI(pool);
     	userPools.push(poolFrontEnd);
-		userPools.sort(function(a, b) {
-       		return new Date(b.data('data-pool').updatedAt) - new Date(a.data('data-pool').updatedAt);
-       	});
+		  userPools.sort(function(a, b) {
+       	return new Date(b.data('data-pool').updatedAt) - new Date(a.data('data-pool').updatedAt);
+      });
     });
 
     userPools.forEach(function(pool) {
-		$('#pool-list').append(pool);
+		  $('#pool-list').append(pool);
     });
-    */
+    
   });
 }
 
-//takes an array of MessagePool JSON, makes a frontend for each index in the array,
-//and adds the frontend to the global userPools array
-// function getUserPools(response, index) {
-// 	if(index < getUserPools.length) {
-// 		//get the pool data
-// 		var pool = response[index];
-// 		//create a UI for it
-// 		var poolFrontEnd = createPoolUI(pool);
-// 		poolFrontEnd.data('data-pool', pool);
-
-// 		$.get('/api/messagePool/' + pool.id).then(function(users) {
-// 			poolFrontEnd.data('data-memebers', users);
-
-// 			userPools.push(poolFrontEnd);
-//       		userPools.sort(function(a, b) {
-//         		return new Date(b.data('data-pool').updatedAt) - new Date(a.data('data-pool').updatedAt);
-//       		});
-
-//       		getUserPools(response, index + 1);
-// 		});
-// 	}
-// }
-
 function createPoolUI(data) {
-  	var pool = $('<div>');
+  	var pool = $('<li>');
   	pool.data('data-pool', data[0]);
 
   	//get the usernames of all the members
-  	var members = [];
-  	for(var i = 1; i < data.length; i++) {
-  		if(data[i].UserUsername != username) {
-  			members.push(data[i].UserUsername);
-  		}
-  	}
-  	pool.data('data-members', members);
+  	pool.data('data-members', data[1]);
 
   	pool.addClass('conversation-tab');
-	//do more stuff to make it look like something
+    
+    //do more stuff to make it look like something
+    var poolTitle = '';
+    for(var i = 0; i < data[1].length; i++) {
+      if(data[1][i].UserUsername != username) {
+        poolTitle += data[1][i].UserUsername;
+      }
+    }
+
+    pool.text(poolTitle);
+
+    pool.addClass('c-nav__item');
+    pool.addClass('c-nav__item--success');
 
   	return pool;
 }
 
 $(document).on('click', '.conversation-tab', function() {
-	openPool($(this).data('data-pool').id);
+	openPool($(this));
 });
 
 function openPool(pool) {
 	currentPoolID = pool.data('data-pool').id;
-	console.log(pool.data('data-pool'));
-	console.log(pool.data('data-members'));
+  console.log('Switched to ' + currentPoolID);
+	// console.log(pool.data('data-pool'));
+	// console.log(pool.data('data-members'));
 	//open the pool
 
+  //clear the message area
+  
+  //target the message area
+  //get all messages for pool
+  //with the array of messages, go through each one
+    //build a UI for it, coloring based on who said what
+    //append to the message area
+  loadMessages();
+}
+
+function getCurrentPoolKey() {
+  var key;
+  userPools.forEach(function(pool) {
+    var poolData = $(pool).data('data-pool');
+
+    if(poolData.id === currentPoolID) {
+      key = poolData.key;
+    }
+  });
+  return key;
 }
 
 //filter message pools
@@ -153,22 +159,43 @@ function filterPools() {
 
 //load messages when a pool is opened
 function loadMessages() {
-  
+  $('#displayed-messages').empty();
+
+  $.get('/api/message/' + currentPoolID).then(function(result) {
+    result.forEach(function(message) {
+      $.post('/api/message/encode', {key: getCurrentPoolKey(), message: message.body}).then(function(decoded) {
+        var bubble = $('<span>');
+        bubble.addClass('c-bubble u-color-white u-display-block');
+        bubble.text(decoded);
+        if(message.UserUsername === username) {
+          bubble.addClass('c-bubble--left');
+        } else {
+          bubble.addClass('c-bubble--right');
+        }
+        $('#displayed-messages').append(bubble);
+      });
+    });
+  });
 }
 
 $('#send-btn').on('click', function() {
   var message = $('#message-input').val().trim();
+  key = getCurrentPoolKey();
+
   if(message != '') {
-    var encodedMessage = locksmith(message);
-    $.post("/api/message", {
-      body: encodedMessage,
-      UserUsername: username,
-      MessagePoolID: currentPoolID
-    }).then(function(result) {
-      //display in UI
-      
-      //clear the message input
-      $('#message-input').val('');
+    $.post("/api/message/encode", { key: key, message: message }).then(function(encodedMessage) {
+      console.log(encodedMessage);
+
+      $.post("/api/message", {
+        body: encodedMessage,
+        UserUsername: username,
+        MessagePoolID: currentPoolID
+      }).then(function(result) {
+        //display in UI
+        loadMessages();
+        //clear the message input
+        $('#message-input').val('');
+      });
     });
   }
 });
