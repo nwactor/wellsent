@@ -207,3 +207,6 @@ $('#send-btn').on('click', function() {
 });
 
 //update messages: use firebase? or sequelize triggers
+//firebase and sequelize triggers turned into timer
+setInterval(loadMessages(), 500);
+
