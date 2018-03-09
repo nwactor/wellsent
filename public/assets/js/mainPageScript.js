@@ -170,14 +170,16 @@ function loadMessages() {
     result.forEach(function(message) {
       $.post('/api/message/encode', { key: key, message: message.body }).then(function(decoded) {
         var bubble = $('<span>');
-        bubble.addClass('c-bubble u-color-white u-display-block');
+        bubble.addClass('c-bubble u-color-white u-display-block clearfix');
         bubble.text(decoded);
         if (message.UserUsername === username) {
           bubble.addClass('c-bubble--left');
         } else {
           bubble.addClass('c-bubble--right');
         }
-        $('#displayed-messages').append(bubble);
+        var row = $('<div>').addClass('row');
+        row.append(bubble);
+        $('#displayed-messages').append(row);
       });
     });
   });

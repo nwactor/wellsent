@@ -1,14 +1,7 @@
 body {
 	/*background-color: black;*/
 }
-.c-bubble{
-	width:200px;
-	display: block;
 
-}
-.c-bubble--left{
-	float:right;
-}
 .c-nav{
 	height:100%;
 	background-color: purple;
@@ -96,10 +89,26 @@ button{
 	flex-wrap: wrap;
 }
 
+#displayed-users {
+	font-size: 40px;
+}
+
+.c-bubble{
+	width:200px;
+	margin-bottom: 10px;
+}
+
+.c-bubble--left{
+	margin-left: 1046px;
+}
+
+.c-bubble--right{
+	margin-left: 15px;
+}
+
 #input-row {
 	height: 20%;
-/*	border-top: 1px solid black;
-*/	bottom: 0;
+	bottom: 0;
 	text-align: center;
 }
 
@@ -109,5 +118,4 @@ button{
 }
 
 #send-area {
-/*	border-left: 1px solid black;
-*/}
+}
