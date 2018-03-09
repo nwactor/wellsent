@@ -15,6 +15,9 @@ $.get("/api/user_data").then(function(data) {
   loadPools();
 });
 
+//set interval to display incoming messages periodically
+
+
 //=============================================
 //===============User Searching================
 //=============================================
@@ -51,7 +54,6 @@ $(document).on('click', '.search-result', function() {
 
 function startConversation(recipient) {
   $.post('/api/messagePool/', { username: username, receivername: recipient }).then(function(result) {
-    console.log(result);
     var poolFrontEnd = createPoolUI(result);
     userPools.unshift(poolFrontEnd);
     $('#pool-list').prepend(poolFrontEnd);
@@ -140,8 +142,6 @@ function getCurrentPoolKey() {
   var key;
   userPools.forEach(function(pool) {
     var poolData = JSON.parse(pool.attr('data-pool'));
-    console.log(poolData);
-
     if (poolData.id === currentPoolID) {
       key = poolData.key;
     }
@@ -164,24 +164,49 @@ $('#conversation-filter').on('input', function() {
 function loadMessages() {
   $('#displayed-messages').empty();
 
+  var currentMessages = [];
+
   var key = getCurrentPoolKey(); //must be placed here b/c asynchronicity or something
 
   $.get('/api/message/' + currentPoolID).then(function(result) {
-    result.forEach(function(message) {
-      $.post('/api/message/encode', { key: key, message: message.body }).then(function(decoded) {
-        var bubble = $('<span>');
-        bubble.addClass('c-bubble u-color-white u-display-block clearfix');
-        bubble.text(decoded);
-        if (message.UserUsername === username) {
-          bubble.addClass('c-bubble--left');
-        } else {
-          bubble.addClass('c-bubble--right');
-        }
-        var row = $('<div>').addClass('row');
-        row.append(bubble);
-        $('#displayed-messages').append(row);
-      });
-    });
+    
+    //recursively display the messages in order
+    displayMessages(result, 0, key, currentMessages);
+    //sort the messages by time and display them
+    // currentMessages.sort(function(a, b) {
+    //   return new Date(b.attr('data-time')) - new Date(a.attr('data-time'));
+    // });
+    // for(var i = 0; i < currentMessages.length; i++) {
+    //   $('#displayed-messages').append(currentMessages[i]);
+    // }
+  });
+}
+
+function displayMessages(messageArray, index, key, currentMessages) {
+  $.post('/api/message/encode', {key: key, message: messageArray[index].body}).then(function(decoded) {
+    var bubble = $('<span>');
+      bubble.addClass('c-bubble u-color-white u-display-block clearfix');
+      bubble.text(decoded);
+        
+      if (messageArray[index].UserUsername === username) {
+        bubble.addClass('c-bubble--left');
+      } else {
+        bubble.addClass('c-bubble--right');
+      }
+      
+      var row = $('<div>').addClass('row');
+      row.append(bubble);
+      row.attr('data-time', messageArray[index].updatedAt);
+      
+      currentMessages.push(row);
+  }).then(function() {
+    if(index != messageArray.length - 1) {
+      displayMessages(messageArray, index + 1, key, currentMessages);
+    } else {
+      for(var i = 0; i < currentMessages.length; i++) {
+        $('#displayed-messages').append(currentMessages[i]);
+      }
+    }
   });
 }
 
