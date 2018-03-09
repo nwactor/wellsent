@@ -6,6 +6,7 @@ var currentPoolID;
 var username;
 var userPools = [];
 var convoFilter = '';
+var loadingMessages = false;
 
 // On load does a GET request to figure out which user is logged in
 // and updates the HTML on the page
@@ -167,11 +168,14 @@ $('#conversation-filter').on('input', function() {
 
 //load messages when a pool is opened
 function loadMessages() {
+  if(loadingMessages) { return; } //IMPORTANT
+
   var currentMessages = [];
   var key = getCurrentPoolKey(); //must be placed here b/c asynchronicity or something
 
   $.get('/api/message/' + currentPoolID).then(function(result) {
     if($('#displayed-messages').children().length < result.length) {
+      loadingMessages = true;
       $('#displayed-messages').empty();
       displayMessages(result, 0, key, currentMessages);
     }
@@ -202,6 +206,7 @@ function displayMessages(messageArray, index, key, currentMessages) {
       for(var i = 0; i < currentMessages.length; i++) {
         $('#displayed-messages').append(currentMessages[i]);
       }
+      loadingMessages = false; //IMPORTANT
     }
   });
 }
