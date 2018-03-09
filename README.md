@@ -6,7 +6,7 @@ https://wellsent.herokuapp.com/main
 
 Created by Nick Wactor, Yusuf Mekias, Hillari Malle, Denis Wu, Mike Thompson
 
-## Info
+## Info:
 
 This chat application was designed with a secure, encrypted, and anonymous login and logout and using message pools and junction tables, and our **own** simple encryption algorithm. 
 
@@ -35,7 +35,7 @@ We have created an **xOR** messaging hasher which hashes the message against the
 [String To Binary](https://www.npmjs.com/package/string-to-binary),
 [Validate.io Binary String](https://www.npmjs.com/package/validate.io-binary-string)
 
-## Build
+## Build:
 
 1. Open terminal with git installed
 
@@ -49,15 +49,14 @@ We have created an **xOR** messaging hasher which hashes the message against the
 
 In your terminal run:
 
-```
-node server.js
-```
+`node server.js`
+
 and open browser to:
-```
-localhost:8080
-```
+
+`localhost:8080`
+
 On the login page, create a username and password or login with your existing username and password. Then click 
-```
-Search for User
-```
+
+`Search for User`
+
 to search for a user to message. Click user's name to initiate conversation. When finished, simply log out.
