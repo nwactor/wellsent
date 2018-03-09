@@ -56,10 +56,19 @@ and open browser to:
 `localhost:8080`
 
 
-![Screen shot1](https://github.com/nwactor/wellsent/blob/master/public/assets/images/login.jpg?raw=true)
+![Screen shot1](https://github.com/nwactor/wellsent/blob/master/public/assets/images/login.png?raw=true)
 
-On the login page, create a username and password or login with your existing username and password. Then click 
+![Screen shot1](https://github.com/nwactor/wellsent/blob/master/public/assets/images/login.png?raw=true)
 
+![Screen shot1](https://github.com/nwactor/wellsent/blob/master/public/assets/images/enterusernamepassword.png?raw=true)
+
+On the login page, create a username and password or login with your existing username and password.
+
+On the signup page, you will prompted to enter a valid username and password if you enter an invalid one. Once you are signed in, click:
 `Search for User`
 
-to search for a user to message. Click user's name to initiate conversation. When finished, simply log out.
+![Screen shot1](https://github.com/nwactor/wellsent/blob/master/public/assets/images/main.png?raw=true)
+
+to search for a user to message. Click user's name to initiate conversation. When finished, simply log out and you will be brought back to the login page.
+
+![Screen shot1](https://github.com/nwactor/wellsent/blob/master/public/assets/images/login.png?raw=true)
