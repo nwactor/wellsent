@@ -84,8 +84,8 @@ function loadPools() {
 //orders the pools in the sidebar
 function orderPools() {
   userPools.sort(function(a, b) {
-    if (a.data('data-pool') != undefined && b.data('data-pool') != undefined) {
-      return new Date(b.data('data-pool').updatedAt) - new Date(a.data('data-pool').updatedAt);
+    if (JSON.parse(a.attr('data-pool')) != undefined && JSON.parse(b.attr('data-pool')) != undefined) {
+      return new Date(JSON.parse(b.attr('data-pool')).updatedAt) - new Date(JSON.parse(a.attr('data-pool')).updatedAt);
     }
   });
 
@@ -101,10 +101,10 @@ function orderPools() {
 //creates the visual respresentation of a conversation for the sidebar
 function createPoolUI(data) {
   var pool = $('<li>');
-  pool.data('data-pool', data[0]);
+  pool.attr('data-pool', JSON.stringify(data[0]));
 
   //get the usernames of all the members
-  pool.data('data-members', data[1]);
+  pool.attr('data-members', JSON.stringify(data[1]));
 
   pool.addClass('conversation-tab');
 
@@ -130,7 +130,7 @@ $(document).on('click', '.conversation-tab', function() {
 
 //open the given pool
 function openPool(pool) {
-  currentPoolID = pool.data('data-pool').id;
+  currentPoolID = JSON.parse(pool.attr('data-pool')).id;
   console.log('Switched to ' + currentPoolID);
   $('#displayed-users').text(pool.text());
   loadMessages();
@@ -139,7 +139,7 @@ function openPool(pool) {
 function getCurrentPoolKey() {
   var key;
   userPools.forEach(function(pool) {
-    var poolData = $(pool).data('data-pool');
+    var poolData = JSON.parse(pool.attr('data-pool'));
     console.log(poolData);
 
     if (poolData.id === currentPoolID) {

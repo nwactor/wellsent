@@ -4,7 +4,7 @@ body {
 
 .c-nav{
 	height:100%;
-	background-color: purple;
+	background-color: black;
 }
 
 button{
@@ -85,7 +85,7 @@ button{
 }
 
 #message-area {
-	height: 80%;
+	height: 77%;
 	flex-wrap: wrap;
 }
 
