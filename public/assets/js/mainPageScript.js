@@ -175,7 +175,8 @@ function loadMessages() {
 
   $.get('/api/message/' + currentPoolID).then(function(result) {
     if($('#displayed-messages').children().length < result.length) {
-      loadingMessages = true;
+      if(loadingMessages) { return; } //JUST IN CASE A PROCESS GOT IN WHILE THE PRECEDING PROCESS WAS STILL WAITING FOR ITS REQUEST
+      loadingMessages = true; //IMPORTANT
       $('#displayed-messages').empty();
       displayMessages(result, 0, key, currentMessages);
     }
@@ -218,7 +219,11 @@ $('#send-btn').on('click', function() {
   key = getCurrentPoolKey();
 
   if (message != '') {
+    //clear the message input
+    $('#message-input').val(''); //clear ASAP so that multiple clicks can't go through
+    
     $.post("/api/message/encode", { key: key, message: message }).then(function(encodedMessage) {
+  
       console.log(encodedMessage);
 
       $.post("/api/message", {
@@ -228,8 +233,6 @@ $('#send-btn').on('click', function() {
       }).then(function(result) {
         //display in UI
         loadMessages();
-        //clear the message input
-        $('#message-input').val('');
         //reorder the pools in sidebar
         orderPools();
       });
