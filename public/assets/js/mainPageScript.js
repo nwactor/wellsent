@@ -16,7 +16,12 @@ $.get("/api/user_data").then(function(data) {
 });
 
 //set interval to display incoming messages periodically
-
+setInterval(function() {
+  if(currentPoolID != undefined) {
+    console.log('interval');
+    loadMessages();
+  }
+}, 1500);
 
 //=============================================
 //===============User Searching================
@@ -162,23 +167,14 @@ $('#conversation-filter').on('input', function() {
 
 //load messages when a pool is opened
 function loadMessages() {
-  $('#displayed-messages').empty();
-
   var currentMessages = [];
-
   var key = getCurrentPoolKey(); //must be placed here b/c asynchronicity or something
 
   $.get('/api/message/' + currentPoolID).then(function(result) {
-    
-    //recursively display the messages in order
-    displayMessages(result, 0, key, currentMessages);
-    //sort the messages by time and display them
-    // currentMessages.sort(function(a, b) {
-    //   return new Date(b.attr('data-time')) - new Date(a.attr('data-time'));
-    // });
-    // for(var i = 0; i < currentMessages.length; i++) {
-    //   $('#displayed-messages').append(currentMessages[i]);
-    // }
+    if($('#displayed-messages').children().length < result.length) {
+      $('#displayed-messages').empty();
+      displayMessages(result, 0, key, currentMessages);
+    }
   });
 }
 
