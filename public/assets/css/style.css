@@ -1,121 +1,122 @@
 body {
-	/*background-color: black;*/
+  /*background-color: black;*/
 }
 
-.c-nav{
-	height:100%;
-	background-color: black;
+.c-nav {
+  height: 100%;
+  background-color: black;
 }
 
-button{
-	margin: auto;
+button {
+  margin: auto;
 }
 
 .container-fluid {
-	height: 100%;
-/*	width:100%;
-*/	/*background-color: red;*/
-}
-#singin-height{
-	width:25%;
-	height:25%;
+  height: 100%;
+  /*	width:100%;
+*/
+  /*background-color: red;*/
 }
 
-#topbar {
+#singin-height {
+  width: 25%;
+  height: 25%;
 }
+
+#topbar {}
 
 .content-row {
-	height: 100%;
+  height: 100%;
 }
+
 
 /*Login Page*/
 
 .form-container {
-	text-align: center;
-
-	padding: 30px;
-
-	border-width: 1px;
-	border-color: black;
-	border-style: solid;
-
-	margin-top: 10%;
+  text-align: center;
+  padding: 30px;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  margin-top: 10%;
 }
+
 
 /*Main Page*/
 
 #content-row {
-	height: 650px;
+  height: 650px;
 }
 
 #sidebar {
-	min-height: wrap;
+  min-height: wrap;
 }
 
 #user-search-area {
-	height: 10%;
-/*	border-bottom: 1px solid black;
-*/}
+  height: 10%;
+  /*	border-bottom: 1px solid black;
+*/
+}
 
 #open-search-btn {
-	width: 95%;
-	height: 100%;
-	margin: auto;
+  width: 95%;
+  height: 100%;
+  margin: auto;
 }
 
 .search-result {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 #conversation-pool-area {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 
 #conversations-header {
-	margin: auto;
+  margin: auto;
 }
 
 #conversation-filter {
-	margin: auto;
-	margin-bottom: 5px;
+  margin: auto;
+  margin-bottom: 5px;
 }
 
 .conversation-tab {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 #message-area {
-	height: 77%;
-	flex-wrap: wrap;
+  height: 77%;
+  flex-wrap: wrap;
 }
 
 #displayed-users {
-	font-size: 40px;
+  font-size: 40px;
 }
 
-.c-bubble{
-	width:200px;
-	margin-bottom: 10px;
+.c-bubble {
+  width: 200px;
+  margin-bottom: 10px;
+  color: #a2c0ef;
 }
 
-.c-bubble--left{
-	margin-left: 1046px;
+.c-bubble--left {
+  margin-left: 1046px;
 }
 
-.c-bubble--right{
-	margin-left: 15px;
+.c-bubble--right {
+  margin-left: 15px;
 }
 
 #input-row {
-	height: 20%;
-	bottom: 0;
-	text-align: center;
+  height: 20%;
+  bottom: 0;
+  text-align: center;
 }
 
 #user-input-box {
-	width: 90%;
-	height: 70%;
+  width: 90%;
+  height: 70%;
 }
 
-#send-area {
-}
+#send-area {}
