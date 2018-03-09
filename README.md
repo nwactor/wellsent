@@ -55,6 +55,9 @@ and open browser to:
 
 `localhost:8080`
 
+
+![Screen shot1](https://github.com/nwactor/wellsent/blob/master/public/assets/images/login.jpg?raw=true)
+
 On the login page, create a username and password or login with your existing username and password. Then click 
 
 `Search for User`
