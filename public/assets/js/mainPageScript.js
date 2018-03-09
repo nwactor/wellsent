@@ -130,7 +130,6 @@ $(document).on('click', '.conversation-tab', function() {
 
 //open the given pool
 function openPool(pool) {
-  console.log(pool);
   currentPoolID = pool.data('data-pool').id;
   console.log('Switched to ' + currentPoolID);
   $('#displayed-users').text(pool.text());
@@ -141,6 +140,7 @@ function getCurrentPoolKey() {
   var key;
   userPools.forEach(function(pool) {
     var poolData = $(pool).data('data-pool');
+    console.log(poolData);
 
     if (poolData.id === currentPoolID) {
       key = poolData.key;
@@ -164,9 +164,11 @@ $('#conversation-filter').on('input', function() {
 function loadMessages() {
   $('#displayed-messages').empty();
 
+  var key = getCurrentPoolKey(); //must be placed here b/c asynchronicity or something
+
   $.get('/api/message/' + currentPoolID).then(function(result) {
     result.forEach(function(message) {
-      $.post('/api/message/encode', { key: getCurrentPoolKey(), message: message.body }).then(function(decoded) {
+      $.post('/api/message/encode', { key: key, message: message.body }).then(function(decoded) {
         var bubble = $('<span>');
         bubble.addClass('c-bubble u-color-white u-display-block');
         bubble.text(decoded);
