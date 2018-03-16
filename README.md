@@ -73,9 +73,9 @@ On the signup page, you will prompted to enter a valid username and password if 
 
 Once you are signed in, click:
 
-`Search for User`
+`Search for Users`
 
-to search for a user to message. This will bring up a popup modal that allows you to search for the usernames of other users. Click a user's name to initiate conversation. If you are test running the app locally, you will have to create multiple accounts so that there are other users in your database to message.
+on the lefthand side of the screen to search for a user to message. This will bring up a popup modal that allows you to search for the usernames of other users. Click a user's name to initiate conversation. If you are test running the app locally, you will have to create multiple accounts so that there are other users in your database to message.
 
 ![Screen shot1](https://github.com/nwactor/wellsent/blob/master/public/assets/images/main.png?raw=true)
 
