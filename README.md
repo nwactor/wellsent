@@ -1,23 +1,19 @@
-Project Two Group Three [GitHub](http://github.com/nwactor/wellsent)
-
 # **Wellsent** Secure Encrypted Anonymous Messaging Application
 
-https://wellsent.herokuapp.com/main
+https://wellsent.herokuapp.com
 
 Created by Nick Wactor, Yusuf Mekias, Hillari Malle, Denis Wu, Mike Thompson
 
 ## Info:
 
-This chat application was designed with a secure, encrypted, and anonymous login and logout and using message pools and junction tables, and our **own** simple encryption algorithm. 
-
-We have created an **xOR** messaging hasher which hashes the message against the key, called Locksmith, which we hope to be an NPM pckage one day.
+Wellsent is an Instant-Messaging application designed to support anonymous and secure transactions. It is powered by our **own** encryption algorithm, Locksmith, which uses **xOR** hashing to encrypt the messages stored on our server. This prevents anyone from stealing information from our users' messages, even if they manage to hack our database. Locksmith will soon be released as a standalone NPM package.
 
 ## Technologies used:
 [MySQL](https://www.mysql.com/),
 [Passport](http://www.passportjs.org/),
 [Blaze](https://www.blazeui.com/),
 [Sequelize](http://docs.sequelizejs.com/),
-[Express](https://expressjs.com/),
+[Express](https://expressjs.com/)
 
 
 ## NPM Packages used:
