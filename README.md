@@ -6,7 +6,7 @@ Created by Nick Wactor, Yusuf Mekias, Hillari Malle, Denis Wu, Mike Thompson
 
 ## Info:
 
-Wellsent is an Instant-Messaging application designed to support anonymous and secure transactions. It is powered by our **own** encryption algorithm, Locksmith, which uses **xOR** hashing to encrypt the messages stored on our server. This prevents anyone from stealing information from our users' messages, even if they manage to hack our database. Locksmith will soon be released as a standalone NPM package.
+Wellsent is an Instant-Messaging application designed to support anonymous and secure transactions. It is powered by our own encryption algorithm, Locksmith, which uses **xOR** hashing to encrypt the messages stored on our server. This prevents anyone from stealing information from our users' messages, even if they manage to hack our database. Locksmith is planned to be released as a standalone node package.
 
 ## Technologies used:
 [MySQL](https://www.mysql.com/),
